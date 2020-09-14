@@ -1,5 +1,5 @@
 import pytest
-import wire
+from src import wire
 
 class TestInitialization:
     def testInput(self):
