@@ -9,8 +9,8 @@ def before_wire():
 class TestInitialization:
     def testInput(self, before_wire):
         test_wire = before_wire
-        assert test_wire.end_a_conn == None
+        assert test_wire.in_conn == None
 
     def testOutput(self, before_wire):
         test_wire = before_wire
-        assert test_wire.end_b_conn == None
+        assert test_wire.out_conn == None
