@@ -46,3 +46,8 @@ class TestSignalReceipt:
         test_wire = before_wire
         test_wire.receive_signal('HIGH')
         assert test_wire.in_signal == 'HIGH'
+
+    def test_receives_low_input_signal(self, before_wire):
+        test_wire = before_wire
+        test_wire.receive_signal('LOW')
+        assert test_wire.in_signal == 'LOW'
