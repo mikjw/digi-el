@@ -40,3 +40,9 @@ class TestConnection:
         test_wire_2 = before_wire_2
         test_wire.connect_next(test_wire_2)
         assert test_wire_2.in_conn == test_wire
+
+class TestSignalReceipt:
+    def test_receives_high_input_signal(self, before_wire):
+        test_wire = before_wire
+        test_wire.receive_signal('HIGH')
+        assert test_wire.in_signal == 'HIGH'

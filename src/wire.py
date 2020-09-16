@@ -11,3 +11,7 @@ class Wire():
 
     def __connect_previous(self, comp):
         self.in_conn = comp
+
+    def receive_signal(self, signal):
+        self.in_signal = 'HIGH'
+
