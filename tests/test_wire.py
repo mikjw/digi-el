@@ -26,3 +26,9 @@ class TestConnection:
         test_wire_2 = before_wire_2
         test_wire.connect_next(test_wire_2)
         assert test_wire.out_conn == test_wire_2
+
+    def test_connects_to_previous_component(self, before_wire, before_wire_2):
+        test_wire = before_wire
+        test_wire_2 = before_wire_2
+        test_wire.connect_next(test_wire_2)
+        assert test_wire_2.in_conn == test_wire
