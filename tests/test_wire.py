@@ -12,11 +12,11 @@ def before_wire_2():
     return test_wire_2
 
 class TestInitialization:
-    def testInput(self, before_wire):
+    def test_input_connection(self, before_wire):
         test_wire = before_wire
         assert test_wire.in_conn == None
 
-    def testOutput(self, before_wire):
+    def test_output_connection(self, before_wire):
         test_wire = before_wire
         assert test_wire.out_conn == None
 
