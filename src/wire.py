@@ -13,8 +13,6 @@ class Wire():
         self.in_conn = comp
 
     def receive_signal(self, signal):
-        if signal == 'HIGH':
-            self.in_signal = 'HIGH'
-        else:
-            self.in_signal = 'LOW'
+        self.in_signal = signal
+
 
