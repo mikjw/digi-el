@@ -2,6 +2,8 @@ class Wire():
     def __init__(self):
         self.in_conn = None
         self.out_conn = None
+        self.in_signal = None
+        self.out_signal = None
 
     def connect_next(self, comp):
         self.out_conn = comp
