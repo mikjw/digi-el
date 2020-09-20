@@ -59,3 +59,10 @@ class TestSignalReceipt:
         test_wire = before_wire
         test_wire.receive_signal('LOW')
         assert test_wire.in_signal == 'LOW'
+        
+class TestBranchCreation:
+    def test_adds_branch_b(self, before_wire):
+        test_wire = before_wire
+        test_wire.add_branch()
+        assert test_wire.out_conn_b == None
+        

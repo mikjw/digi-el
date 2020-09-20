@@ -15,5 +15,11 @@ class Wire():
 
     def receive_signal(self, signal):
         self.in_signal = signal
+        
+    def add_branch(self):
+        if hasattr(self, 'out_conn_b'):
+            setattr(self, 'out_conn_c', None)
+        else: 
+            setattr(self, 'out_conn_b', None) 
 
 
