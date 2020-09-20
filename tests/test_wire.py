@@ -27,6 +27,14 @@ class TestInitialization:
     def test_output_signal(self, before_wire):
         test_wire = before_wire
         assert test_wire.out_signal_a == None
+        
+    def test_has_branch_count(self, before_wire):
+        test_wire = before_wire
+        assert hasattr(test_wire, 'branch_count')
+        
+    def test_branch_count_is_0(self, before_wire):
+        test_wire = before_wire
+        assert test_wire.branch_count == 0
 
 class TestConnection:
     def test_connects_to_next_component(self, before_wire, before_wire_2):
