@@ -66,3 +66,10 @@ class TestBranchCreation:
         test_wire.add_branch()
         assert test_wire.out_conn_b == None
         
+    def test_adds_branch_c(self, before_wire):
+        test_wire = before_wire
+        for i in range(2):
+            test_wire.add_branch()
+        assert test_wire.out_conn_c == None
+
+        
