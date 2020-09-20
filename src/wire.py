@@ -17,8 +17,9 @@ class Wire():
         self.in_signal = signal
         
     def add_branch(self):
-        self.branch_count += 1
-        new_attribute = 'out_conn_' + chr(self.branch_count + 96)
-        setattr(self, new_attribute, None)
+        if (self.branch_count < 10):
+            self.branch_count += 1
+            new_attribute = 'out_conn_' + chr(self.branch_count + 96)
+            setattr(self, new_attribute, None)
 
 

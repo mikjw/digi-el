@@ -94,4 +94,10 @@ class TestBranchCreation:
         for i in range(9):
             test_wire.add_branch()
         assert test_wire.branch_count == 10
+        
+    def test_limits_branch_count_to_10(self, before_wire):
+        test_wire = before_wire
+        for i in range(11):
+            test_wire.add_branch()
+        assert test_wire.branch_count == 10
     
