@@ -18,7 +18,7 @@ class TestInitialization:
 
     def test_output_connection(self, before_wire):
         test_wire = before_wire
-        assert test_wire.out_conn == None
+        assert test_wire.out_conn_a == None
 
     def test_input_signal(self, before_wire):
         test_wire = before_wire
@@ -26,14 +26,14 @@ class TestInitialization:
         
     def test_output_signal(self, before_wire):
         test_wire = before_wire
-        assert test_wire.out_signal == None
+        assert test_wire.out_signal_a == None
 
 class TestConnection:
     def test_connects_to_next_component(self, before_wire, before_wire_2):
         test_wire = before_wire
         test_wire_2 = before_wire_2
         test_wire.connect_next(test_wire_2)
-        assert test_wire.out_conn == test_wire_2
+        assert test_wire.out_conn_a == test_wire_2
 
     def test_connects_to_previous_component(self, before_wire, before_wire_2):
         test_wire = before_wire
