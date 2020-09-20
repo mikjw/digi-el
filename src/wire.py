@@ -1,6 +1,6 @@
 class Wire():
     def __init__(self):
-        self.branch_count = 0
+        self.branch_count = 1
         self.in_conn = None
         self.out_conn_a = None
         self.in_signal = None

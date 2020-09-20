@@ -32,9 +32,9 @@ class TestInitialization:
         test_wire = before_wire
         assert hasattr(test_wire, 'branch_count')
         
-    def test_branch_count_is_0(self, before_wire):
+    def test_branch_count_is_1(self, before_wire):
         test_wire = before_wire
-        assert test_wire.branch_count == 0
+        assert test_wire.branch_count == 1
 
 class TestConnection:
     def test_connects_to_next_component(self, before_wire, before_wire_2):
@@ -71,5 +71,4 @@ class TestBranchCreation:
         for i in range(2):
             test_wire.add_branch()
         assert test_wire.out_conn_c == None
-
         
