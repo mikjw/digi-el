@@ -20,8 +20,11 @@ class Wire():
         try:
             if (self.branch_count < 10):
                 self.branch_count += 1
-                new_attribute = 'out_conn_' + chr(self.branch_count + 96)
-                setattr(self, new_attribute, None)
+                label = chr(self.branch_count + 96)
+                new_attr_conn = f'out_conn_{label}'
+                new_attr_signal = f'out_signal_{label}'
+                setattr(self, new_attr_conn, None)
+                setattr(self, new_attr_signal, None)
             else:
                 raise ValueError("Cannot add branch - limit reached"); 
         except ValueError as err:

@@ -61,22 +61,27 @@ class TestSignalReceipt:
         assert test_wire.in_signal == 'LOW'
         
 class TestBranchCreation:
-    def test_adds_branch_b(self, before_wire):
+    def test_adds_branch_b_conn(self, before_wire):
         test_wire = before_wire
         test_wire.add_branch()
         assert test_wire.out_conn_b == None
         
-    def test_adds_branch_c(self, before_wire):
+    def test_adds_branch_c_conn(self, before_wire):
         test_wire = before_wire
         for i in range(2):
             test_wire.add_branch()
         assert test_wire.out_conn_c == None
         
-    def test_adds_branch_j(self, before_wire):
+    def test_adds_branch_j_conn(self, before_wire):
         test_wire = before_wire
         for i in range(9):
             test_wire.add_branch()
         assert test_wire.out_conn_j == None
+        
+    def test_adds_branch_b_signal(self, before_wire):
+        test_wire = before_wire
+        test_wire.add_branch()
+        assert test_wire.out_signal_b == None
         
     def test_increments_branch_count(self, before_wire):
         test_wire = before_wire
