@@ -21,5 +21,6 @@ class Wire():
             self.branch_count += 1
             new_attribute = 'out_conn_' + chr(self.branch_count + 96)
             setattr(self, new_attribute, None)
-
+        else:
+            print("Cannot add branch - limit reached")
 

@@ -101,3 +101,9 @@ class TestBranchCreation:
             test_wire.add_branch()
         assert test_wire.branch_count == 10
     
+    def test_prints_branch_limit_error(self, capfd, before_wire):
+        test_wire = before_wire
+        for i in range(10):
+            test_wire.add_branch()
+        out, err = capfd.readouterr()
+        assert out == "Cannot add branch - limit reached\n"
