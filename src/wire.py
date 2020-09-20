@@ -21,5 +21,6 @@ class Wire():
             setattr(self, 'out_conn_c', None)
         else: 
             setattr(self, 'out_conn_b', None) 
+        self.branch_count += 1
 
 

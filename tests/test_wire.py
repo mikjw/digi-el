@@ -66,9 +66,20 @@ class TestBranchCreation:
         test_wire.add_branch()
         assert test_wire.out_conn_b == None
         
+    def test_increments_branch_count(self, before_wire):
+        test_wire = before_wire
+        test_wire.add_branch()
+        assert test_wire.branch_count == 2
+        
     def test_adds_branch_c(self, before_wire):
         test_wire = before_wire
         for i in range(2):
             test_wire.add_branch()
         assert test_wire.out_conn_c == None
         
+    def test_twice_increments_branch_count(self, before_wire):
+        test_wire = before_wire
+        for i in range(2):
+            test_wire.add_branch()
+        assert test_wire.branch_count == 3
+    
