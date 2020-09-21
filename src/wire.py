@@ -17,16 +17,13 @@ class Wire():
         self.in_signal = signal
         
     def add_branch(self):
-        try:
-            if (self.branch_count < 10):
-                self.branch_count += 1
-                label = chr(self.branch_count + 96)
-                new_attr_conn = f'out_conn_{label}'
-                new_attr_signal = f'out_signal_{label}'
-                setattr(self, new_attr_conn, None)
-                setattr(self, new_attr_signal, None)
-            else:
-                raise ValueError("Cannot add branch - limit reached"); 
-        except ValueError as err:
-            print(err)
+        if (self.branch_count < 10):
+            self.branch_count += 1
+            label = chr(self.branch_count + 96)
+            new_attr_conn = f'out_conn_{label}'
+            new_attr_signal = f'out_signal_{label}'
+            setattr(self, new_attr_conn, None)
+            setattr(self, new_attr_signal, None)
+        else:
+            raise ValueError("Cannot add branch - limit reached")
 
