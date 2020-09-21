@@ -37,16 +37,16 @@ class TestInitialization:
         assert test_wire.branch_count == 1
 
 class TestConnection:
-    def test_connects_to_next_component(self, before_wire, before_wire_2):
+    def test_connects_to_next_component_at_a(self, before_wire, before_wire_2):
         test_wire = before_wire
         test_wire_2 = before_wire_2
-        test_wire.connect_next(test_wire_2)
+        test_wire.connect_next(test_wire_2, 'A')
         assert test_wire.out_connections['A'] == test_wire_2
 
     def test_connects_to_previous_component(self, before_wire, before_wire_2):
         test_wire = before_wire
         test_wire_2 = before_wire_2
-        test_wire.connect_next(test_wire_2)
+        test_wire.connect_next(test_wire_2, 'A')
         assert test_wire_2.in_conn == test_wire
 
 class TestSignalReceipt:

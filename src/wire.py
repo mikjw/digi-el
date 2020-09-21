@@ -12,7 +12,7 @@ class Wire():
             'A': None
         }
 
-    def connect_next(self, comp):
+    def connect_next(self, comp, terminal):
         self.out_connections['A'] = comp
         self.out_connections['A'].__connect_previous(self)
 
