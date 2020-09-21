@@ -14,7 +14,7 @@ def before_wire_2():
 class TestInitialization:
     def test_input_connection(self, before_wire):
         test_wire = before_wire
-        assert test_wire.in_conn == None
+        assert test_wire.in_connnection == None
 
     def test_input_signal(self, before_wire):
         test_wire = before_wire
@@ -22,11 +22,11 @@ class TestInitialization:
                  
     def test_output_connection(self, before_wire):
         test_wire = before_wire
-        assert test_wire.out_connections['out_conn_a'] == None
+        assert test_wire.out_connections['A'] == None
         
     def test_output_signal(self, before_wire):
         test_wire = before_wire
-        assert test_wire.out_signal_a == None
+        assert test_wire.out_signals['A'] == None
         
     def test_has_branch_count(self, before_wire):
         test_wire = before_wire
@@ -41,7 +41,7 @@ class TestConnection:
         test_wire = before_wire
         test_wire_2 = before_wire_2
         test_wire.connect_next(test_wire_2)
-        assert test_wire.out_conn_a == test_wire_2
+        assert test_wire.out_connections['A'] == test_wire_2
 
     def test_connects_to_previous_component(self, before_wire, before_wire_2):
         test_wire = before_wire
@@ -64,24 +64,24 @@ class TestBranchCreation:
     def test_adds_branch_b_conn(self, before_wire):
         test_wire = before_wire
         test_wire.add_branch()
-        assert test_wire.out_conn_b == None
+        assert test_wire.out_connections['B'] == None
         
     def test_adds_branch_c_conn(self, before_wire):
         test_wire = before_wire
         for i in range(2):
             test_wire.add_branch()
-        assert test_wire.out_conn_c == None
+        assert test_wire.out_connections['C'] == None
         
     def test_adds_branch_j_conn(self, before_wire):
         test_wire = before_wire
         for i in range(9):
             test_wire.add_branch()
-        assert test_wire.out_conn_j == None
+        assert test_wire.out_connections['J'] == None
         
     def test_adds_branch_b_signal(self, before_wire):
         test_wire = before_wire
         test_wire.add_branch()
-        assert test_wire.out_signal_b == None
+        assert test_wire.out_signals['B'] == None
         
     def test_increments_branch_count(self, before_wire):
         test_wire = before_wire
