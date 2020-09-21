@@ -42,7 +42,21 @@ class TestConnection:
         test_wire_2 = before_wire_2
         test_wire.connect_next(test_wire_2, 'A')
         assert test_wire.out_connections['A'] == test_wire_2
-
+        
+    def test_raises_exception_invalid_terminal(self, capfd, before_wire, before_wire_2):
+        test_wire = before_wire
+        test_wire_2 = before_wire_2
+        test_wire.connect_next(test_wire_2, 'B')
+        out, err = capfd.readouterr()
+        assert out == "Connection failed - invalid terminal\n"
+        
+    def test_connects_to_next_component_at_b(self, before_wire, before_wire_2):
+        test_wire = before_wire
+        test_wire_2 = before_wire_2
+        test_wire.add_branch()
+        test_wire.connect_next(test_wire_2, 'B')
+        assert test_wire.out_connections['B'] == test_wire_2
+        
     def test_connects_to_previous_component(self, before_wire, before_wire_2):
         test_wire = before_wire
         test_wire_2 = before_wire_2

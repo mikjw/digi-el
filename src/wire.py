@@ -13,8 +13,14 @@ class Wire():
         }
 
     def connect_next(self, comp, terminal):
-        self.out_connections['A'] = comp
-        self.out_connections['A'].__connect_previous(self)
+        try: 
+            if (terminal in self.out_connections):
+                self.out_connections[terminal] = comp
+                self.out_connections[terminal].__connect_previous(self)
+            else: 
+                raise ValueError("Connection failed - invalid terminal") 
+        except ValueError as err:
+            print(err)
 
     def __connect_previous(self, comp):
         self.in_conn = comp
@@ -30,7 +36,7 @@ class Wire():
                 self.out_connections[label] = None
                 self.out_signals[label] = None
             else:
-                raise ValueError("Cannot add branch - limit reached"); 
+                raise ValueError("Cannot add branch - limit reached") 
         except ValueError as err:
             print(err)
   
