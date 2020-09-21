@@ -5,6 +5,10 @@ class Wire():
         self.out_conn_a = None
         self.in_signal = None
         self.out_signal_a = None
+        
+        self.out_connections = {
+            'out_conn_a': None
+        }
 
     def connect_next(self, comp):
         self.out_conn_a = comp

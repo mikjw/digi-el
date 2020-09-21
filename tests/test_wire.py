@@ -16,13 +16,13 @@ class TestInitialization:
         test_wire = before_wire
         assert test_wire.in_conn == None
 
-    def test_output_connection(self, before_wire):
-        test_wire = before_wire
-        assert test_wire.out_conn_a == None
-
     def test_input_signal(self, before_wire):
         test_wire = before_wire
         assert test_wire.in_signal == None
+                 
+    def test_output_connection(self, before_wire):
+        test_wire = before_wire
+        assert test_wire.out_connections['out_conn_a'] == None
         
     def test_output_signal(self, before_wire):
         test_wire = before_wire
