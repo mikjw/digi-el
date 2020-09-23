@@ -1,7 +1,7 @@
 class Wire():
     def __init__(self):
         self.branch_count = 1
-        self.in_connnection = None
+        self.in_connection = None
         self.in_signal = None
         
         self.out_connections = {
@@ -16,14 +16,14 @@ class Wire():
         try: 
             if (terminal in self.out_connections):
                 self.out_connections[terminal] = comp
-                self.out_connections[terminal].__connect_previous(self)
+                self.out_connections[terminal].connect_previous(self)
             else: 
                 raise ValueError("Connection failed - invalid terminal") 
         except ValueError as err:
             print(err)
-
-    def __connect_previous(self, comp):
-        self.in_conn = comp
+                        
+    def connect_previous(self, comp):
+        self.in_connection = comp
 
     def receive_signal(self, signal):
         self.in_signal = signal
@@ -39,5 +39,7 @@ class Wire():
                 raise ValueError("Cannot add branch - limit reached") 
         except ValueError as err:
             print(err)
+            
+
   
 
