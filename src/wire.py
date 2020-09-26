@@ -27,8 +27,7 @@ class Wire():
 
     def receive_signal(self, signal):
         self.in_signal = signal
-        for key in self.out_signals: 
-            self.out_signals[key] = signal
+        self.__propagate_signal(signal)
         
     def add_branch(self):
         try:
@@ -42,6 +41,9 @@ class Wire():
         except ValueError as err:
             print(err)
             
+    def __propagate_signal(self, signal):
+        for key in self.out_signals: 
+            self.out_signals[key] = signal
 
   
 
