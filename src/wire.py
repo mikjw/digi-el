@@ -44,6 +44,3 @@ class Wire():
     def __propagate_signal(self, signal):
         for key in self.out_signals: 
             self.out_signals[key] = signal
-
-  
-

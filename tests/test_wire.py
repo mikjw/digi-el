@@ -50,6 +50,12 @@ class TestConnection:
         test_wire.connect_previous(mock_wire)
         assert test_wire.in_connection == mock_wire
         
+    def test_calls_connect_previous_on_next(self, before_wire, mocker):
+        test_wire = before_wire
+        mock_wire = mocker.Mock()
+        test_wire.connect_next(mock_wire, 'A')
+        mock_wire.connect_previous.assert_called_with(test_wire)
+        
     def test_raises_exception_invalid_terminal(self, capfd, before_wire, mocker):
         test_wire = before_wire
         mock_wire = mocker.Mock()
@@ -148,5 +154,3 @@ class TestBranchCreation:
         out, err = capfd.readouterr()
         assert out == "Cannot add branch - limit reached\n"
         
-        
-    
