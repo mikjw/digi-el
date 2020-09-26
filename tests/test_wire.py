@@ -1,22 +1,9 @@
 import pytest
-from unittest.mock import Mock, MagicMock
 from src import wire
 
 @pytest.fixture(autouse=True)   
 def before_wire():
-    test_wire = wire.Wire()
-    return test_wire
-
-@pytest.fixture(autouse=True)   
-def mock_wire():
-    # mock_wire = MagicMock
-    mock_wire.connect_previous = MagicMock 
-    return mock_wire
-
-class TestMockyFixture:
-    def test_the_fixture(self, mocker):
-        assert mocker == mocker
-    
+    return wire.Wire()
 
 class TestInitialization:
     def test_input_connection(self, before_wire):
@@ -46,34 +33,26 @@ class TestInitialization:
 class TestConnection:
     def test_connects_to_next_component_at_a(self, before_wire, mocker):
         test_wire = before_wire
-        mock_wire = mocker.Mock
-        mocker.patch('mock_wire.connect_previous')
-        test_wire.connect_next(mock_wire, 'A')
-        assert test_wire.out_connections['A'] == mock_wire
-
-class TestConnection:
-    def test_connects_to_next_component_at_a(self, before_wire, mock_wire):
-        test_wire = before_wire
-        mock_wire = mock_wire
+        mock_wire = mocker.Mock()
         test_wire.connect_next(mock_wire, 'A')
         assert test_wire.out_connections['A'] == mock_wire
         
-    def test_connects_to_next_component_at_b(self, before_wire, mock_wire):
+    def test_connects_to_next_component_at_b(self, before_wire, mocker):
         test_wire = before_wire
-        mock_wire = mock_wire
+        mock_wire = mocker.Mock()
         test_wire.add_branch()
         test_wire.connect_next(mock_wire, 'B')
         assert test_wire.out_connections['B'] == mock_wire
         
-    def test_connects_to_previous_component(self, before_wire, mock_wire):
+    def test_connects_to_previous_component(self, before_wire, mocker):
         test_wire = before_wire
-        mock_wire = mock_wire
+        mock_wire = mocker.Mock()
         test_wire.connect_previous(mock_wire)
         assert test_wire.in_connection == mock_wire
         
-    def test_raises_exception_invalid_terminal(self, capfd, before_wire, mock_wire):
+    def test_raises_exception_invalid_terminal(self, capfd, before_wire, mocker):
         test_wire = before_wire
-        mock_wire = mock_wire
+        mock_wire = mocker.Mock()
         test_wire.connect_next(mock_wire, 'B')
         out, err = capfd.readouterr()
         assert out == "Connection failed - invalid terminal\n"
@@ -95,7 +74,7 @@ class TestSignalPropagation:
         test_wire.receive_signal('LOW')
         assert test_wire.out_signals['A'] == 'LOW'
         
-    def test_one_out_signal_low(self, before_wire):
+    def test_one_out_signal_high(self, before_wire):
         test_wire = before_wire
         test_wire.receive_signal('HIGH')
         assert test_wire.out_signals['A'] == 'HIGH'
@@ -107,7 +86,7 @@ class TestSignalPropagation:
         assert test_wire.out_signals['A'] == 'LOW'
         assert test_wire.out_signals['B'] == 'LOW'
     
-    def test_three_out_signal_low(self, before_wire):
+    def test_three_out_signal_high(self, before_wire):
         test_wire = before_wire
         for i in range(2):
             test_wire.add_branch()
