@@ -109,6 +109,13 @@ class TestSignalTransmission:
         test_wire.receive_signal('HIGH')
         mock_wire.receive_signal.assert_called_with('HIGH')
         
+    def test_calls_receive_signal_on_next_with_low(self, before_wire, mocker):
+        test_wire = before_wire
+        mock_wire = mocker.Mock()
+        test_wire.connect_next(mock_wire, 'A')
+        test_wire.receive_signal('LOW')
+        mock_wire.receive_signal.assert_called_with('LOW')
+        
 class TestBranchCreation:
     def test_adds_branch_b_conn(self, before_wire):
         test_wire = before_wire
