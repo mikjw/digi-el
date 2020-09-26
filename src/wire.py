@@ -3,11 +3,12 @@ class Wire():
         self.branch_count = 1
         self.in_connection = None
         self.in_signal = None
-        self.out_signal = None
         
         self.out_connections = {
             'A': None
         }
+        
+        self.out_signal = None
 
     def connect_next(self, comp, terminal):
         try: 
