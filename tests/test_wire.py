@@ -101,6 +101,14 @@ class TestSignalPropagation:
         assert test_wire.out_signals['B'] == 'HIGH'
         assert test_wire.out_signals['C'] == 'HIGH'
         
+class TestSignalTransmission:        
+    def test_calls_receive_signal_on_next_with_high(self, before_wire, mocker):
+        test_wire = before_wire
+        mock_wire = mocker.Mock()
+        test_wire.connect_next(mock_wire, 'A')
+        test_wire.receive_signal('HIGH')
+        mock_wire.receive_signal.assert_called_with('HIGH')
+        
 class TestBranchCreation:
     def test_adds_branch_b_conn(self, before_wire):
         test_wire = before_wire

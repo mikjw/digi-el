@@ -28,6 +28,9 @@ class Wire():
     def receive_signal(self, signal):
         self.in_signal = signal
         self.__propagate_signal(signal)
+        for key in self.out_connections:
+            if (self.out_connections[key] != None):  
+                self.out_connections[key].receive_signal('HIGH')
         
     def add_branch(self):
         try:
