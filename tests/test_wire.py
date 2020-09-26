@@ -9,9 +9,14 @@ def before_wire():
 
 @pytest.fixture(autouse=True)   
 def mock_wire():
-    mock_wire = Mock
+    # mock_wire = MagicMock
     mock_wire.connect_previous = MagicMock 
     return mock_wire
+
+class TestMockyFixture:
+    def test_the_fixture(self, mocker):
+        assert mocker == mocker
+    
 
 class TestInitialization:
     def test_input_connection(self, before_wire):
@@ -37,6 +42,14 @@ class TestInitialization:
     def test_branch_count_is_1(self, before_wire):
         test_wire = before_wire
         assert test_wire.branch_count == 1
+
+class TestConnection:
+    def test_connects_to_next_component_at_a(self, before_wire, mocker):
+        test_wire = before_wire
+        mock_wire = mocker.Mock
+        mocker.patch('mock_wire.connect_previous')
+        test_wire.connect_next(mock_wire, 'A')
+        assert test_wire.out_connections['A'] == mock_wire
 
 class TestConnection:
     def test_connects_to_next_component_at_a(self, before_wire, mock_wire):
@@ -75,6 +88,33 @@ class TestSignalReceipt:
         test_wire = before_wire
         test_wire.receive_signal('LOW')
         assert test_wire.in_signal == 'LOW'
+        
+class TestSignalPropagation:
+    def test_one_out_signal_low(self, before_wire):
+        test_wire = before_wire
+        test_wire.receive_signal('LOW')
+        assert test_wire.out_signals['A'] == 'LOW'
+        
+    def test_one_out_signal_low(self, before_wire):
+        test_wire = before_wire
+        test_wire.receive_signal('HIGH')
+        assert test_wire.out_signals['A'] == 'HIGH'
+        
+    def test_two_out_signal_low(self, before_wire):
+        test_wire = before_wire
+        test_wire.add_branch()
+        test_wire.receive_signal('LOW')
+        assert test_wire.out_signals['A'] == 'LOW'
+        assert test_wire.out_signals['B'] == 'LOW'
+    
+    def test_three_out_signal_low(self, before_wire):
+        test_wire = before_wire
+        for i in range(2):
+            test_wire.add_branch()
+        test_wire.receive_signal('HIGH')
+        assert test_wire.out_signals['A'] == 'HIGH'
+        assert test_wire.out_signals['B'] == 'HIGH'
+        assert test_wire.out_signals['C'] == 'HIGH'
         
 class TestBranchCreation:
     def test_adds_branch_b_conn(self, before_wire):
