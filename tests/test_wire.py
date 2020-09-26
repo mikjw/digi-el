@@ -20,7 +20,7 @@ class TestInitialization:
         
     def test_output_signal(self, before_wire):
         test_wire = before_wire
-        assert test_wire.out_signals['A'] == None
+        assert test_wire.out_signal == None
         
     def test_has_branch_count(self, before_wire):
         test_wire = before_wire
@@ -78,28 +78,12 @@ class TestSignalPropagation:
     def test_one_out_signal_low(self, before_wire):
         test_wire = before_wire
         test_wire.receive_signal('LOW')
-        assert test_wire.out_signals['A'] == 'LOW'
+        assert test_wire.out_signal == 'LOW'
         
     def test_one_out_signal_high(self, before_wire):
         test_wire = before_wire
         test_wire.receive_signal('HIGH')
-        assert test_wire.out_signals['A'] == 'HIGH'
-        
-    def test_two_out_signal_low(self, before_wire):
-        test_wire = before_wire
-        test_wire.add_branch()
-        test_wire.receive_signal('LOW')
-        assert test_wire.out_signals['A'] == 'LOW'
-        assert test_wire.out_signals['B'] == 'LOW'
-    
-    def test_three_out_signal_high(self, before_wire):
-        test_wire = before_wire
-        for i in range(2):
-            test_wire.add_branch()
-        test_wire.receive_signal('HIGH')
-        assert test_wire.out_signals['A'] == 'HIGH'
-        assert test_wire.out_signals['B'] == 'HIGH'
-        assert test_wire.out_signals['C'] == 'HIGH'
+        assert test_wire.out_signal == 'HIGH'
         
 class TestSignalTransmission:        
     def test_calls_receive_signal_on_next_with_high(self, before_wire, mocker):
@@ -133,11 +117,6 @@ class TestBranchCreation:
         for i in range(9):
             test_wire.add_branch()
         assert test_wire.out_connections['J'] == None
-        
-    def test_adds_branch_b_signal(self, before_wire):
-        test_wire = before_wire
-        test_wire.add_branch()
-        assert test_wire.out_signals['B'] == None
         
     def test_increments_branch_count(self, before_wire):
         test_wire = before_wire
