@@ -7,4 +7,7 @@ class Nand():
         self.out_connection = None
         self.out_signal = None
         
+    def connect_next(self, comp):
+        self.out_connection = comp
+        
         

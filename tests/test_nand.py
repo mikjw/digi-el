@@ -23,3 +23,11 @@ class TestInitialization:
         
     def test_output_signal(self, test_nand):
         assert test_nand.out_signal == None
+        
+class TestConnection:
+    def test_connects_to_next_component(self, test_nand, mocker):
+        mock_wire = mocker.Mock()
+        test_nand.connect_next(mock_wire)
+        assert test_nand.out_connection == mock_wire
+
+
