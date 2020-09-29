@@ -11,9 +11,7 @@ class Nand():
         self.out_connection = comp
         
     def connect_previous(self, comp, terminal):
-        if terminal == 'A':
-            self.in_connection_a = comp
-        else:
-            self.in_connection_b = comp
-        
+        lowercase_label = chr(ord(terminal) + 32)
+        setattr(self, f'in_connection_{lowercase_label}', comp)
+
         
