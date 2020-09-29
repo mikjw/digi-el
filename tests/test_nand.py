@@ -44,3 +44,15 @@ class TestConnection:
         mock_wire = mocker.Mock()
         test_nand.connect_next(mock_wire, 'A')
         mock_wire.connect_previous.assert_called_with(test_nand, 'A')
+        
+    def test_notifies_invalid_input_terminal_C(self, capfd, test_nand, mocker):
+        mock_wire = mocker.Mock()
+        test_nand.connect_previous(mock_wire, 'C')
+        out, err = capfd.readouterr()
+        assert out == "Connection failed - invalid input terminal\n"
+        
+    def test_allows_valid_input_terminal_B(self, capfd, test_nand, mocker):
+        mock_wire = mocker.Mock()
+        test_nand.connect_previous(mock_wire, 'B')
+        out, err = capfd.readouterr()
+        assert out != "Connection failed - invalid input terminal\n"
