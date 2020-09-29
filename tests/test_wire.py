@@ -46,7 +46,7 @@ class TestConnection:
         test_wire.connect_next(mock_wire, 'A')
         mock_wire.connect_previous.assert_called_with(test_wire, 'A')
         
-    def test_raises_exception_invalid_terminal(self, capfd, test_wire, mocker):
+    def test_notifies_invalid_terminal(self, capfd, test_wire, mocker):
         mock_wire = mocker.Mock()
         test_wire.connect_next(mock_wire, 'B')
         out, err = capfd.readouterr()

@@ -40,7 +40,7 @@ class TestConnection:
         test_nand.connect_previous(mock_wire, 'B')
         assert test_nand.in_connection_b == mock_wire
                 
-    def test_calls_connect_previous_on_next(self, test_nand, mocker):
+    def test_calls_connect_previous_on_next_comp(self, test_nand, mocker):
         mock_wire = mocker.Mock()
         test_nand.connect_next(mock_wire, 'A')
         mock_wire.connect_previous.assert_called_with(test_nand, 'A')
@@ -57,13 +57,13 @@ class TestConnection:
         out, err = capfd.readouterr()
         assert out == "Connection failed - invalid input terminal\n"
         
-    def test_allows_valid_input_terminal_B(self, capfd, test_nand, mocker):
+    def test_does_not_notify_valid_input_terminal_B(self, capfd, test_nand, mocker):
         mock_wire = mocker.Mock()
         test_nand.connect_previous(mock_wire, 'B')
         out, err = capfd.readouterr()
         assert out != "Connection failed - invalid input terminal\n"
         
-    def test_rejects_invalid_terminal(self, capfd, test_nand, mocker):
+    def test_rejects_invalid_terminal_attribute(self, capfd, test_nand, mocker):
         mock_wire = mocker.Mock()
         test_nand.connect_previous(mock_wire, 'C')
         assert not hasattr(test_nand, 'in_connection_c')
