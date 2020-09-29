@@ -62,3 +62,8 @@ class TestConnection:
         test_nand.connect_previous(mock_wire, 'B')
         out, err = capfd.readouterr()
         assert out != "Connection failed - invalid input terminal\n"
+        
+    def test_rejects_invalid_terminal(self, capfd, test_nand, mocker):
+        mock_wire = mocker.Mock()
+        test_nand.connect_previous(mock_wire, 'C')
+        assert not hasattr(test_nand, 'in_connection_c')
