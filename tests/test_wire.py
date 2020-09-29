@@ -38,13 +38,13 @@ class TestConnection:
         
     def test_connects_to_previous_component(self, test_wire, mocker):
         mock_wire = mocker.Mock()
-        test_wire.connect_previous(mock_wire)
+        test_wire.connect_previous(mock_wire, 'A')
         assert test_wire.in_connection == mock_wire
         
     def test_calls_connect_previous_on_next(self, test_wire, mocker):
         mock_wire = mocker.Mock()
         test_wire.connect_next(mock_wire, 'A')
-        mock_wire.connect_previous.assert_called_with(test_wire)
+        mock_wire.connect_previous.assert_called_with(test_wire, 'A')
         
     def test_raises_exception_invalid_terminal(self, capfd, test_wire, mocker):
         mock_wire = mocker.Mock()

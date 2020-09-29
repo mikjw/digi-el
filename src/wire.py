@@ -14,13 +14,13 @@ class Wire():
         try: 
             if (terminal in self.out_connections):
                 self.out_connections[terminal] = comp
-                self.out_connections[terminal].connect_previous(self)
+                self.out_connections[terminal].connect_previous(self, terminal)
             else: 
                 raise ValueError("Connection failed - invalid terminal") 
         except ValueError as err:
             print(err)
                         
-    def connect_previous(self, comp):
+    def connect_previous(self, comp, terminal):
         self.in_connection = comp
 
     def receive_signal(self, signal):
