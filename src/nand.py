@@ -7,8 +7,9 @@ class Nand():
         self.out_connection = None
         self.out_signal = None
         
-    def connect_next(self, comp):
+    def connect_next(self, comp, terminal):
         self.out_connection = comp
+        self.out_connection.connect_previous(self, terminal)
         
     def connect_previous(self, comp, terminal):
         lowercase_label = chr(ord(terminal) + 32)
