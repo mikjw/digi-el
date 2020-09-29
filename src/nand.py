@@ -12,7 +12,7 @@ class Nand():
         self.out_connection.connect_previous(self, terminal)
         
     def connect_previous(self, comp, terminal):
-        if terminal == 'C':
+        if terminal != 'A' and terminal != 'B':
             print("Connection failed - invalid input terminal")
         lowercase_label = chr(ord(terminal) + 32)
         setattr(self, f'in_connection_{lowercase_label}', comp)
