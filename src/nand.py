@@ -16,10 +16,13 @@ class Nand():
             if terminal == 'A' or terminal == 'B':
                 lowercase_label = chr(ord(terminal) + 32)
                 setattr(self, f'in_connection_{lowercase_label}', comp)
-            else: 
+            else:
                 raise ValueError("Connection failed - invalid input terminal")
         except ValueError as err:
             print(err)
-
-
-        
+            
+    def receive_signal(self, comp, signal):
+        if self.in_connection_a == comp:
+            self.in_signal_a = signal
+        elif self.in_connection_b == comp:
+            self.in_signal_b = signal

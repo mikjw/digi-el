@@ -67,3 +67,28 @@ class TestConnection:
         mock_wire = mocker.Mock()
         test_nand.connect_previous(mock_wire, 'C')
         assert not hasattr(test_nand, 'in_connection_c')
+
+class TestSignalReceipt:    
+    def test_receives_high_input_signal_at_a(self, test_nand, mocker):
+        mock_wire = mocker.Mock()
+        test_nand.connect_previous(mock_wire, 'A')
+        test_nand.receive_signal(mock_wire, 'HIGH')
+        assert test_nand.in_signal_a == 'HIGH'
+        
+    def test_receives_low_input_signal_at_a(self, test_nand, mocker):
+        mock_wire = mocker.Mock()
+        test_nand.connect_previous(mock_wire, 'A')
+        test_nand.receive_signal(mock_wire, 'LOW')
+        assert test_nand.in_signal_a == 'LOW'
+        
+    def test_receives_high_input_signal_at_b(self, test_nand, mocker):
+        mock_wire = mocker.Mock()
+        test_nand.connect_previous(mock_wire, 'B')
+        test_nand.receive_signal(mock_wire, 'HIGH')
+        assert test_nand.in_signal_b == 'HIGH'
+
+    def test_receives_low_input_signal_at_b(self, test_nand, mocker):
+        mock_wire = mocker.Mock()
+        test_nand.connect_previous(mock_wire, 'B')
+        test_nand.receive_signal(mock_wire, 'LOW')
+        assert test_nand.in_signal_b == 'LOW'
