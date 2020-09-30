@@ -22,6 +22,10 @@ class Nand():
             print(err)
             
     def receive_signal(self, comp, signal):
+        self.__assign_input(comp, signal)
+            
+            
+    def __assign_input(self, comp, signal):
         if self.in_connection_a == comp:
             self.in_signal_a = signal
         elif self.in_connection_b == comp:
