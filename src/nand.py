@@ -24,7 +24,7 @@ class Nand():
     def receive_signal(self, comp, signal):
         self.__assign_input(comp, signal)
         self.__perform_logic()
-        if self.out_connection != None and self.out_signal != None:
+        if self.out_connection is not None and self.out_signal is not None:
             self.__transmit_signal()
 
     def __assign_input(self, comp, signal):

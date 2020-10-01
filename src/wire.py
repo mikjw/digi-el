@@ -44,5 +44,5 @@ class Wire():
             
     def __transmit_signal(self, signal):
         for key in self.out_connections:
-            if (self.out_connections[key] != None): 
+            if (self.out_connections[key] is not None): 
                 self.out_connections[key].receive_signal(self.out_signal)
