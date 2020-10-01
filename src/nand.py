@@ -27,6 +27,8 @@ class Nand():
             (self.in_signal_a == 'LOW' and self.in_signal_b == 'HIGH') or 
             (self.in_signal_a == 'HIGH' and self.in_signal_b == 'LOW')):
                 self.out_signal = 'HIGH'
+        elif self.in_signal_a == 'HIGH' and self.in_signal_b == 'HIGH': 
+                self.out_signal = 'LOW'
 
     def __assign_input(self, comp, signal):
         if self.in_connection_a == comp:
