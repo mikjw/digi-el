@@ -27,7 +27,7 @@ class TestInitialization:
 class TestConnection:
     def test_connects_to_next_component(self, test_nand, mocker):
         mock_wire = mocker.Mock()
-        test_nand.connect_next(mock_wire, 'A')
+        test_nand.connect_next(mock_wire)
         assert test_nand.out_connection == mock_wire
         
     def test_connects_to_previous_comp_on_a(self, test_nand, mocker):
@@ -42,8 +42,8 @@ class TestConnection:
                 
     def test_calls_connect_previous_on_next_comp(self, test_nand, mocker):
         mock_wire = mocker.Mock()
-        test_nand.connect_next(mock_wire, 'A')
-        mock_wire.connect_previous.assert_called_with(test_nand, 'A')
+        test_nand.connect_next(mock_wire)
+        mock_wire.connect_previous.assert_called_with(test_nand)
         
     def test_notifies_invalid_input_terminal_C(self, capfd, test_nand, mocker):
         mock_wire = mocker.Mock()
@@ -92,3 +92,17 @@ class TestSignalReceipt:
         test_nand.connect_previous(mock_wire, 'B')
         test_nand.receive_signal(mock_wire, 'LOW')
         assert test_nand.in_signal_b == 'LOW'
+        
+class TestLogic:
+    def test_only_input_a_gives_none(self, test_nand, mocker):
+        mock_wire_a = mocker.Mock()
+        test_nand.connect_previous(mock_wire_a, 'A')
+        test_nand.receive_signal(mock_wire_a, "LOW")
+        assert test_nand.out_signal == None
+
+    def test_only_input_b_gives_none(self, test_nand, mocker):
+        mock_wire_b = mocker.Mock()
+        test_nand.connect_previous(mock_wire_b, 'B')
+        test_nand.receive_signal(mock_wire_b, "LOW")
+        assert test_nand.out_signal == None
+

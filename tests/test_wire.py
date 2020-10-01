@@ -38,7 +38,7 @@ class TestConnection:
         
     def test_connects_to_previous_component(self, test_wire, mocker):
         mock_wire = mocker.Mock()
-        test_wire.connect_previous(mock_wire, 'A')
+        test_wire.connect_previous(mock_wire)
         assert test_wire.in_connection == mock_wire
         
     def test_calls_connect_previous_on_next(self, test_wire, mocker):

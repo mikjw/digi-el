@@ -7,9 +7,9 @@ class Nand():
         self.out_connection = None
         self.out_signal = None
         
-    def connect_next(self, comp, terminal):
+    def connect_next(self, comp):
         self.out_connection = comp
-        self.out_connection.connect_previous(self, terminal)
+        self.out_connection.connect_previous(self)
         
     def connect_previous(self, comp, terminal):
         try: 
@@ -23,8 +23,7 @@ class Nand():
             
     def receive_signal(self, comp, signal):
         self.__assign_input(comp, signal)
-            
-            
+              
     def __assign_input(self, comp, signal):
         if self.in_connection_a == comp:
             self.in_signal_a = signal

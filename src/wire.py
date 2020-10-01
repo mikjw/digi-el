@@ -20,7 +20,7 @@ class Wire():
         except ValueError as err:
             print(err)
                         
-    def connect_previous(self, comp, terminal):
+    def connect_previous(self, comp):
         self.in_connection = comp
 
     def receive_signal(self, signal):
