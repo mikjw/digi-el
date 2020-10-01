@@ -25,7 +25,7 @@ class Nand():
         self.__assign_input(comp, signal)
         self.__perform_logic()
         if self.out_connection != None:
-            self.out_connection.receive_signal('LOW')
+            self.out_connection.receive_signal(self.out_signal)
 
     def __assign_input(self, comp, signal):
         if self.in_connection_a == comp:
