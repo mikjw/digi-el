@@ -164,3 +164,13 @@ class TestSignalTransmission:
         test_nand.receive_signal(mock_wire_a, 'HIGH')
         test_nand.receive_signal(mock_wire_b, 'HIGH')
         mock_wire_x.receive_signal.assert_called_with('LOW')
+        
+    def test_does_not_transmit_none(self, test_nand, mocker):
+        mock_wire_a = mocker.Mock()
+        mock_wire_b = mocker.Mock()
+        mock_wire_x = mocker.Mock()
+        test_nand.connect_previous(mock_wire_a, 'A')
+        test_nand.connect_previous(mock_wire_b, 'B')
+        test_nand.connect_next(mock_wire_x)
+        test_nand.receive_signal(mock_wire_a, 'HIGH')
+        mock_wire_x.receive_signal.assert_not_called()
