@@ -26,29 +26,29 @@ class TestInitialization:
 
 class TestConnection:
     def test_connects_to_next_component_at_a(self, test_wire, mocker):
-        mock_wire = mocker.Mock()
-        test_wire.connect_next(mock_wire, 'A')
-        assert test_wire.out_connections['A'] == mock_wire
+        mock_component = mocker.Mock()
+        test_wire.connect_next(mock_component, 'A')
+        assert test_wire.out_connections['A'] == mock_component
         
     def test_connects_to_next_component_at_b(self, test_wire, mocker):
-        mock_wire = mocker.Mock()
+        mock_component = mocker.Mock()
         test_wire.add_branch()
-        test_wire.connect_next(mock_wire, 'B')
-        assert test_wire.out_connections['B'] == mock_wire
+        test_wire.connect_next(mock_component, 'B')
+        assert test_wire.out_connections['B'] == mock_component
         
     def test_connects_to_previous_component(self, test_wire, mocker):
-        mock_wire = mocker.Mock()
-        test_wire.connect_previous(mock_wire)
-        assert test_wire.in_connection == mock_wire
+        mock_component = mocker.Mock()
+        test_wire.connect_previous(mock_component)
+        assert test_wire.in_connection == mock_component
         
     def test_calls_connect_previous_on_next(self, test_wire, mocker):
-        mock_wire = mocker.Mock()
-        test_wire.connect_next(mock_wire, 'A')
-        mock_wire.connect_previous.assert_called_with(test_wire, 'A')
+        mock_component = mocker.Mock()
+        test_wire.connect_next(mock_component, 'A')
+        mock_component.connect_previous.assert_called_with(test_wire, 'A')
         
     def test_notifies_invalid_terminal(self, capfd, test_wire, mocker):
-        mock_wire = mocker.Mock()
-        test_wire.connect_next(mock_wire, 'B')
+        mock_component = mocker.Mock()
+        test_wire.connect_next(mock_component, 'B')
         out, err = capfd.readouterr()
         assert out == "Connection failed - invalid terminal\n"
 
@@ -72,16 +72,16 @@ class TestSignalPropagation:
         
 class TestSignalTransmission:        
     def test_calls_receive_signal_on_next_with_high(self, test_wire, mocker):
-        mock_wire = mocker.Mock()
-        test_wire.connect_next(mock_wire, 'A')
+        mock_component = mocker.Mock()
+        test_wire.connect_next(mock_component, 'A')
         test_wire.receive_signal('HIGH')
-        mock_wire.receive_signal.assert_called_with('HIGH')
+        mock_component.receive_signal.assert_called_with('HIGH')
         
     def test_calls_receive_signal_on_next_with_low(self, test_wire, mocker):
-        mock_wire = mocker.Mock()
-        test_wire.connect_next(mock_wire, 'A')
+        mock_component = mocker.Mock()
+        test_wire.connect_next(mock_component, 'A')
         test_wire.receive_signal('LOW')
-        mock_wire.receive_signal.assert_called_with('LOW')
+        mock_component.receive_signal.assert_called_with('LOW')
         
 class TestBranchCreation:
     def test_adds_branch_b_conn(self, test_wire):
