@@ -142,5 +142,14 @@ class TestPropagationAndLogic:
         test_nand.receive_signal(mock_wire_b, 'HIGH')
         assert test_nand.out_signal == 'LOW'   
         
-        
-  
+class TestSignalTransmission:        
+    def test_calls_receive_signal_on_next_with_low(self, test_nand, mocker):
+        mock_wire_a = mocker.Mock()
+        mock_wire_b = mocker.Mock()
+        mock_wire_x = mocker.Mock()
+        test_nand.connect_previous(mock_wire_a, 'A')
+        test_nand.connect_previous(mock_wire_b, 'B')
+        test_nand.connect_next(mock_wire_x)
+        test_nand.receive_signal(mock_wire_a, 'HIGH')
+        test_nand.receive_signal(mock_wire_b, 'HIGH')
+        mock_wire_x.receive_signal.assert_called_with('LOW')
