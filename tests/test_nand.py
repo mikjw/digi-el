@@ -94,14 +94,30 @@ class TestSignalReceipt:
         assert test_nand.in_signal_b == 'LOW'
         
 class TestPropagationAndLogic:  
-    def test_gives_none_with_only_input_a(self, test_nand, mocker):
+    def test_gives_none_with_only_connection_a(self, test_nand, mocker):
         mock_wire_a = mocker.Mock()
         test_nand.connect_previous(mock_wire_a, 'A')
         test_nand.receive_signal(mock_wire_a, 'LOW')
         assert test_nand.out_signal == None
 
-    def test_gives_none_with_only_input_b(self, test_nand, mocker):
+    def test_gives_none_with_only_connection_b(self, test_nand, mocker):
         mock_wire_b = mocker.Mock()
+        test_nand.connect_previous(mock_wire_b, 'B')
+        test_nand.receive_signal(mock_wire_b, 'LOW')
+        assert test_nand.out_signal == None 
+        
+    def test_gives_none_with_only_signal_a(self, test_nand, mocker):
+        mock_wire_a = mocker.Mock()
+        mock_wire_b = mocker.Mock()
+        test_nand.connect_previous(mock_wire_a, 'A')
+        test_nand.connect_previous(mock_wire_b, 'B')
+        test_nand.receive_signal(mock_wire_a, 'LOW')
+        assert test_nand.out_signal == None
+
+    def test_gives_none_with_only_signal_b(self, test_nand, mocker):
+        mock_wire_a = mocker.Mock()
+        mock_wire_b = mocker.Mock()
+        test_nand.connect_previous(mock_wire_a, 'A')
         test_nand.connect_previous(mock_wire_b, 'B')
         test_nand.receive_signal(mock_wire_b, 'LOW')
         assert test_nand.out_signal == None 
