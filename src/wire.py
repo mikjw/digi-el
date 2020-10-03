@@ -10,11 +10,11 @@ class Wire():
         
         self.out_signal = None
 
-    def connect_next(self, comp, terminal):
+    def connect_next(self, comp, out_terminal, in_terminal): 
         try: 
-            if (terminal in self.out_connections):
-                self.out_connections[terminal] = comp
-                self.out_connections[terminal].connect_previous(self, terminal)
+            if (out_terminal in self.out_connections):
+                self.out_connections[out_terminal] = comp
+                self.out_connections[out_terminal].connect_previous(self, in_terminal)
             else: 
                 raise ValueError("Connection failed - invalid terminal") 
         except ValueError as err:
