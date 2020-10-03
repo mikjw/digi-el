@@ -1,15 +1,13 @@
 class Wire():
-    def __init__(self):
-        self.branch_count = 1
+    def __init__(self, branches=1):
+        self.branch_count = 0
         self.branch_limit = 10
         self.in_connection = None
         self.in_signal = None
-        
-        self.out_connections = {
-            'A': None
-        }
-        
+        self.out_connections = {}
         self.out_signal = None
+        
+        self.add_branch(branches)
 
     def connect_next(self, comp, out_terminal, in_terminal): 
         try: 

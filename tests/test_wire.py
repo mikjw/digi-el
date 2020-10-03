@@ -23,6 +23,10 @@ class TestInitialization:
         
     def test_branch_count_is_1(self, test_wire):
         assert test_wire.branch_count == 1
+        
+    def test_initializes_with_branches(self):
+        test_wire_2 = wire.Wire(5)
+        assert test_wire_2.out_connections["E"] == None
 
 class TestConnection:
     def test_connects_to_next_component_at_a(self, test_wire, mocker):
