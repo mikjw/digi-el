@@ -128,3 +128,7 @@ class TestBranchCreation:
         out, err = capfd.readouterr()
         assert out == "Cannot add branch - limit reached\n"
         
+    def test_creates_n_branches(self, test_wire):
+        test_wire.add_branch(4)
+        assert test_wire.branch_count == 5
+        

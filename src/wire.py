@@ -1,6 +1,7 @@
 class Wire():
     def __init__(self):
         self.branch_count = 1
+        self.branch_limit = 10
         self.in_connection = None
         self.in_signal = None
         
@@ -28,12 +29,13 @@ class Wire():
         self.__propagate_signal(signal)
         self.__transmit_signal()
                 
-    def add_branch(self):
+    def add_branch(self, n=1):
         try:
-            if (self.branch_count < 10):
-                self.branch_count += 1
-                label = chr(self.branch_count + 64)
-                self.out_connections[label] = None
+            if (self.branch_count + n <= self.branch_limit):
+                for i in range(n):
+                    self.branch_count += 1
+                    label = chr(self.branch_count + 64)
+                    self.out_connections[label] = None
             else:
                 raise ValueError("Cannot add branch - limit reached") 
         except ValueError as err:
