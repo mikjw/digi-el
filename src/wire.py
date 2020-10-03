@@ -24,7 +24,8 @@ class Wire():
 
     def receive_signal(self, signal):
         self.in_signal = signal
-        self.__propagate_signal(signal)
+        print("wire receipt")
+        self.__propagate_signal(self.in_signal)
         self.__transmit_signal()
                 
     def add_branch(self, n=1):
