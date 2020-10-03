@@ -80,13 +80,13 @@ class TestSignalTransmission:
         mock_component = mocker.Mock()
         test_wire.connect_next(mock_component, 'A', 'A')
         test_wire.receive_signal('HIGH')
-        mock_component.receive_signal.assert_called_with('HIGH')
+        mock_component.receive_signal.assert_called_with(test_wire, 'HIGH')
         
     def test_calls_receive_signal_on_next_with_low(self, test_wire, mocker):
         mock_component = mocker.Mock()
         test_wire.connect_next(mock_component, 'A', 'A')
         test_wire.receive_signal('LOW')
-        mock_component.receive_signal.assert_called_with('LOW')
+        mock_component.receive_signal.assert_called_with(test_wire, 'LOW')
         
 class TestBranchCreation:
     def test_adds_branch_b_conn(self, test_wire):

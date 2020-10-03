@@ -26,7 +26,7 @@ class Wire():
     def receive_signal(self, signal):
         self.in_signal = signal
         self.__propagate_signal(signal)
-        self.__transmit_signal(self.out_signal)
+        self.__transmit_signal()
                 
     def add_branch(self):
         try:
@@ -42,7 +42,7 @@ class Wire():
     def __propagate_signal(self, signal):
         self.out_signal = signal
             
-    def __transmit_signal(self, signal):
+    def __transmit_signal(self):
         for key in self.out_connections:
             if (self.out_connections[key] is not None): 
-                self.out_connections[key].receive_signal(self.out_signal)
+                self.out_connections[key].receive_signal(self, self.out_signal)
