@@ -17,4 +17,9 @@ class TestInitialization:
         
     def test_inits_with_output_count(self, test_container):
         assert test_container.output_count == 1
-               
+
+class TestInputCreation:
+    def test_adds_input_b(self, test_container):
+        test_container.add_input()
+        assert test_container.inputs['B'] == {'component': None, 'signal': None}
+        
