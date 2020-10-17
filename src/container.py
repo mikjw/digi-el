@@ -6,5 +6,8 @@ class Container():
         self.outputs = {'A': {'component': None, 'signal': None}}
         
     def add_input(self):
-        self.inputs['B'] = {'component': None, 'signal': None}
+        if 'B' in self.inputs:
+            self.inputs['C'] = {'component': None, 'signal': None}
+        else: 
+            self.inputs['B'] = {'component': None, 'signal': None}
 
