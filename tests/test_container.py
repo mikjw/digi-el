@@ -24,46 +24,25 @@ class TestInputCreation:
         assert test_container.inputs['B'] == {'component': None, 'signal': None}
         
     def test_adds_input_c(self, test_container):
-        test_container.add_input()
-        test_container.add_input()
+        for i in range(2):
+            test_container.add_input()
         assert test_container.inputs['C'] == {'component': None, 'signal': None}
      
-    def test_adds_input_d(self, test_container):
-        test_container.add_input()
-        test_container.add_input()
-        test_container.add_input()
-        assert test_container.inputs['D'] == {'component': None, 'signal': None}
-    
-    def test_adds_input_d(self, test_container):
-        test_container.add_input()
-        test_container.add_input()
-        test_container.add_input()
-        test_container.add_input()
-        assert test_container.inputs['E'] == {'component': None, 'signal': None}
+    def test_adds_input_e(self, test_container):
+        for i in range(9):
+            test_container.add_input()
+        assert test_container.inputs['J'] == {'component': None, 'signal': None}
         
     def test_increments_input_count_to_2(self, test_container):
         test_container.add_input()
         assert test_container.input_count == 2
         
-    def test_increments_input_count_to_2(self, test_container):
-        test_container.add_input()
-        test_container.add_input()
+    def test_increments_input_count_to_3(self, test_container):
+        for i in range(2):
+            test_container.add_input()
         assert test_container.input_count == 3
         
-    def test_increments_input_count_to_2(self, test_container):
-        test_container.add_input()
-        test_container.add_input()
-        test_container.add_input()
-        assert test_container.input_count == 4
-        
-    def test_increments_input_count_to_2(self, test_container):
-        test_container.add_input()
-        test_container.add_input()
-        test_container.add_input()
-        test_container.add_input()
-        assert test_container.input_count == 5
-        
-
-
-         
-    
+    def test_increments_input_count_to_9(self, test_container):
+        for i in range(8):
+            test_container.add_input()
+        assert test_container.input_count == 9
