@@ -57,3 +57,7 @@ class TestInputCreation:
             test_container.add_input()
         out, err = capfd.readouterr()
         assert out == "Cannot add input - limit reached\n"
+        
+    def test_creates_n_inputs(self, test_container):
+        test_container.add_input(4)
+        assert test_container.input_count == 5
