@@ -46,3 +46,8 @@ class TestInputCreation:
         for i in range(8):
             test_container.add_input()
         assert test_container.input_count == 9
+        
+    def test_limits_input_count_to_16(self, test_container):
+        for i in range(17):
+            test_container.add_input()
+        assert test_container.input_count == 16
