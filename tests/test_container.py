@@ -34,3 +34,36 @@ class TestInputCreation:
         test_container.add_input()
         assert test_container.inputs['D'] == {'component': None, 'signal': None}
     
+    def test_adds_input_d(self, test_container):
+        test_container.add_input()
+        test_container.add_input()
+        test_container.add_input()
+        test_container.add_input()
+        assert test_container.inputs['E'] == {'component': None, 'signal': None}
+        
+    def test_increments_input_count_to_2(self, test_container):
+        test_container.add_input()
+        assert test_container.input_count == 2
+        
+    def test_increments_input_count_to_2(self, test_container):
+        test_container.add_input()
+        test_container.add_input()
+        assert test_container.input_count == 3
+        
+    def test_increments_input_count_to_2(self, test_container):
+        test_container.add_input()
+        test_container.add_input()
+        test_container.add_input()
+        assert test_container.input_count == 4
+        
+    def test_increments_input_count_to_2(self, test_container):
+        test_container.add_input()
+        test_container.add_input()
+        test_container.add_input()
+        test_container.add_input()
+        assert test_container.input_count == 5
+        
+
+
+         
+    

@@ -6,10 +6,16 @@ class Container():
         self.outputs = {'A': {'component': None, 'signal': None}}
         
     def add_input(self):
-        if 'C' in self.inputs:
+        if 'D' in self.inputs:
+            self.inputs['E'] = {'component': None, 'signal': None}
+            self.input_count = 5
+        elif 'C' in self.inputs:
             self.inputs['D'] = {'component': None, 'signal': None}
-        elif 'B' in self.inputs: 
+            self.input_count = 4  
+        elif 'B' in self.inputs:
             self.inputs['C'] = {'component': None, 'signal': None}
-        else: 
-            self.inputs['B'] = {'component': None, 'signal': None}      
+            self.input_count = 3  
+        else:
+            self.inputs['B'] = {'component': None, 'signal': None} 
+            self.input_count = 2
 
