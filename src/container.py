@@ -7,10 +7,13 @@ class Container():
         self.outputs = {'A': {'component': None, 'signal': None}}
         
     def add_input(self):
-        if self.input_count < self.input_count_limit:
-            self.input_count += 1
-            label = chr(self.input_count + 64)
-            self.inputs[label] = {'component': None, 'signal': None}
-        else: 
-            print("Cannot add input - limit reached")
+        try:
+            if self.input_count < self.input_count_limit:
+                self.input_count += 1
+                label = chr(self.input_count + 64)
+                self.inputs[label] = {'component': None, 'signal': None}
+            else:
+                raise ValueError("Cannot add input - limit reached") 
+        except ValueError as err:
+            print(err)
 
