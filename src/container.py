@@ -11,4 +11,6 @@ class Container():
             self.input_count += 1
             label = chr(self.input_count + 64)
             self.inputs[label] = {'component': None, 'signal': None}
+        else: 
+            print("Cannot add input - limit reached")
 

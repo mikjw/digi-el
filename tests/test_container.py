@@ -51,3 +51,9 @@ class TestInputCreation:
         for i in range(17):
             test_container.add_input()
         assert test_container.input_count == 16
+        
+    def test_prints_input_count_limit_error(self, capfd, test_container):
+        for i in range(16):
+            test_container.add_input()
+        out, err = capfd.readouterr()
+        assert out == "Cannot add input - limit reached\n"
