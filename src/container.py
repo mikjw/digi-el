@@ -10,10 +10,10 @@ class Container():
         self.add_input(inputs)
         self.add_output(outputs)
         
-    def add_input(self, n=1):
+    def add_input(self, number_to_add=1):
         try:
-            if self.input_count + n <= self.input_count_limit:
-                for i in range(n):
+            if self.input_count + number_to_add <= self.input_count_limit:
+                for i in range(number_to_add):
                     self.input_count += 1
                     label = chr(self.input_count + 64)
                     self.inputs[label] = {'component': None, 'signal': None}
@@ -22,10 +22,10 @@ class Container():
         except ValueError as err:
             print(err)
             
-    def add_output(self, n=1):
+    def add_output(self, number_to_add=1):
         try:
-            if self.output_count + n <= self.output_count_limit:
-                for i in range(n):
+            if self.output_count + number_to_add <= self.output_count_limit:
+                for i in range(number_to_add):
                     self.output_count += 1
                     label = chr(self.output_count + 64)
                     self.outputs[label] = {'component': None, 'signal': None}

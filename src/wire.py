@@ -1,7 +1,7 @@
 class Wire():
     def __init__(self, branches=1):
+        self.branch_count_limit = 10
         self.branch_count = 0
-        self.branch_limit = 10
         self.in_connection = None
         self.in_signal = None
         self.out_connections = {}
@@ -24,14 +24,13 @@ class Wire():
 
     def receive_signal(self, signal):
         self.in_signal = signal
-        print("wire receipt")
         self.__propagate_signal(self.in_signal)
         self.__transmit_signal()
                 
-    def add_branch(self, n=1):
+    def add_branch(self, number_to_add=1):
         try:
-            if (self.branch_count + n <= self.branch_limit):
-                for i in range(n):
+            if (self.branch_count + number_to_add <= self.branch_limit):
+                for i in range(number_to_add):
                     self.branch_count += 1
                     label = chr(self.branch_count + 64)
                     self.out_connections[label] = None
