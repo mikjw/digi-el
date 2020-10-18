@@ -28,3 +28,9 @@ class TestInputCreation:
         test_container.add_input()
         assert test_container.inputs['C'] == {'component': None, 'signal': None}
      
+    def test_adds_input_d(self, test_container):
+        test_container.add_input()
+        test_container.add_input()
+        test_container.add_input()
+        assert test_container.inputs['D'] == {'component': None, 'signal': None}
+    
