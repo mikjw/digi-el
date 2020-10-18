@@ -1,10 +1,12 @@
 class Container():
-    def __init__(self):
+    def __init__(self, inputs=1):
         self.input_count_limit = 16
-        self.input_count = 1
+        self.input_count = 0
         self.output_count = 1
-        self.inputs = {'A': {'component': None, 'signal': None}}
+        self.inputs = {}
         self.outputs = {'A': {'component': None, 'signal': None}}
+    
+        self.add_input(inputs)
         
     def add_input(self, n=1):
         try:

@@ -17,6 +17,22 @@ class TestInitialization:
         
     def test_inits_with_output_count(self, test_container):
         assert test_container.output_count == 1
+        
+    def test_increments_5_inputs_on_initialization(self):
+        test_container_2 = container.Container(5)
+        assert test_container_2.input_count == 5
+        
+    def test_creates_5_inputs_on_initialization(self):
+        test_container_2 = container.Container(5)
+        assert 'E' in test_container_2.inputs
+        
+    def test_increments_15_inputs_on_initialization(self):
+        test_container_2 = container.Container(15)
+        assert test_container_2.input_count == 15
+        
+    def test_creates_15_inputs_on_initialization(self):
+        test_container_2 = container.Container(15)
+        assert 'O' in test_container_2.inputs
 
 class TestInputCreation:
     def test_adds_input_b(self, test_container):
