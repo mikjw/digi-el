@@ -29,7 +29,7 @@ class Wire():
                 
     def add_branch(self, number_to_add=1):
         try:
-            if (self.branch_count + number_to_add <= self.branch_limit):
+            if (self.branch_count + number_to_add <= self.branch_count_limit):
                 for i in range(number_to_add):
                     self.branch_count += 1
                     label = chr(self.branch_count + 64)
