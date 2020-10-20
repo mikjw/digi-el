@@ -120,3 +120,14 @@ class TestConnection:
         mock_wire = mocker.Mock()
         test_container.connect_within(mock_wire, 'A')
         mock_wire.connect_previous.assert_called_with(test_container)
+        
+    def test_connects_previous_at_a(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.connect_previous(mock_wire, 'A')
+        assert test_container.outputs['A']['component'] == mock_wire
+        
+    def test_connects_previous_at_b(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.add_output()
+        test_container.connect_previous(mock_wire, 'B')
+        assert test_container.outputs['B']['component'] == mock_wire

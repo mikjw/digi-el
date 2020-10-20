@@ -37,3 +37,7 @@ class Container():
     def connect_within(self, component, terminal):
         self.inputs[terminal]['component'] = component
         self.inputs[terminal]['component'].connect_previous(self)
+        
+    def connect_previous(self, component, terminal):
+        self.outputs[terminal]['component'] = component
+
