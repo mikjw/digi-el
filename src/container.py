@@ -34,6 +34,6 @@ class Container():
         except ValueError as err:
             print(err)
             
-    def connect_next(self, component, terminal):
+    def connect_within(self, component, terminal):
         self.inputs[terminal]['component'] = component
         self.inputs[terminal]['component'].connect_previous(self)

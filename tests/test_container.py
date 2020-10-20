@@ -107,16 +107,16 @@ class TestOutputCreation:
 class TestConnection:
     def test_connects_to_component_at_input_a(self, test_container, mocker):
         test_wire = mocker.Mock()
-        test_container.connect_next(test_wire, 'A')
+        test_container.connect_within(test_wire, 'A')
         assert test_container.inputs['A']['component'] == test_wire
         
     def test_connects_to_component_at_input_b(self, test_container, mocker):
         test_wire = mocker.Mock()
         test_container.add_input()
-        test_container.connect_next(test_wire, 'B')
+        test_container.connect_within(test_wire, 'B')
         assert test_container.inputs['B']['component'] == test_wire
      
     def test_calls_connect_previous_on_comp(self, test_container, mocker):
         mock_wire = mocker.Mock()
-        test_container.connect_next(mock_wire, 'A')
+        test_container.connect_within(mock_wire, 'A')
         mock_wire.connect_previous.assert_called_with(test_container)
