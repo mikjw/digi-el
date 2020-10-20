@@ -33,4 +33,6 @@ class Container():
                 raise ValueError("Cannot add output - limit reached") 
         except ValueError as err:
             print(err)
-
+            
+    def connect_next(self, component, terminal):
+        self.inputs[terminal]['component'] = component

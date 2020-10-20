@@ -103,3 +103,16 @@ class TestOutputCreation:
         test_container.add_output(16)
         out, err = capfd.readouterr()
         assert out == "Cannot add output - limit reached\n"
+
+class TestConnection:
+    def test_connects_to_component_at_input_a(self, test_container, mocker):
+        test_wire = mocker.Mock()
+        test_container.connect_next(test_wire, 'A')
+        assert test_container.inputs['A']['component'] == test_wire
+        
+    def test_connects_to_component_at_input_b(self, test_container, mocker):
+        test_wire = mocker.Mock()
+        test_container.add_input()
+        test_container.connect_next(test_wire, 'B')
+        assert test_container.inputs['B']['component'] == test_wire
+         
