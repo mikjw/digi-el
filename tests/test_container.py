@@ -115,4 +115,8 @@ class TestConnection:
         test_container.add_input()
         test_container.connect_next(test_wire, 'B')
         assert test_container.inputs['B']['component'] == test_wire
-         
+     
+    def test_calls_connect_previous_on_comp(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.connect_next(mock_wire, 'A')
+        mock_wire.connect_previous.assert_called_with(test_container)
