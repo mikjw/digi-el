@@ -12,25 +12,25 @@ class Container():
         
     def add_input(self, number_to_add=1):
         try:
-            if self.input_count + number_to_add <= self.input_count_limit:
+            if self.input_count + number_to_add > self.input_count_limit:
+                raise ValueError("Cannot add input - limit reached") 
+            else:
                 for i in range(number_to_add):
                     self.input_count += 1
                     label = chr(self.input_count + 64)
                     self.inputs[label] = {'component': None, 'signal': None}
-            else:
-                raise ValueError("Cannot add input - limit reached") 
         except ValueError as err:
             print(err)
             
     def add_output(self, number_to_add=1):
         try:
-            if self.output_count + number_to_add <= self.output_count_limit:
+            if self.output_count + number_to_add > self.output_count_limit:
+                raise ValueError("Cannot add output - limit reached") 
+            else:
                 for i in range(number_to_add):
                     self.output_count += 1
                     label = chr(self.output_count + 64)
                     self.outputs[label] = {'component': None, 'signal': None}
-            else:
-                raise ValueError("Cannot add output - limit reached") 
         except ValueError as err:
             print(err)
             
