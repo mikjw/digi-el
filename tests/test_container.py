@@ -143,3 +143,11 @@ class TestConnection:
         test_container.connect_within(mock_wire, 'C')
         out, err = capfd.readouterr()
         assert out == "Connection failed - invalid input terminal on container\n"
+        
+    def test_does_not_notify_valid_input_terminal_b(self, capfd, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.add_input()
+        test_container.connect_within(mock_wire, 'B')
+        out, err = capfd.readouterr()
+        assert out != "Connection failed - invalid input terminal on container\n"
+        
