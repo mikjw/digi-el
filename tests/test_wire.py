@@ -98,13 +98,11 @@ class TestBranchCreation:
         assert test_wire.out_connections['B'] == None
         
     def test_adds_branch_c_conn(self, test_wire):
-        for i in range(2):
-            test_wire.add_branch()
+        test_wire.add_branch(2)
         assert test_wire.out_connections['C'] == None
         
     def test_adds_branch_j_conn(self, test_wire):
-        for i in range(9):
-            test_wire.add_branch()
+        test_wire.add_branch(9)
         assert test_wire.out_connections['J'] == None
         
     def test_increments_branch_count(self, test_wire):
@@ -112,27 +110,21 @@ class TestBranchCreation:
         assert test_wire.branch_count == 2
         
     def test_twice_increments_branch_count(self, test_wire):
-        for i in range(2):
-            test_wire.add_branch()
+        test_wire.add_branch(2)
         assert test_wire.branch_count == 3
         
     def test_increments_branch_count_9_times(self, test_wire):
-        for i in range(9):
-            test_wire.add_branch()
+        test_wire.add_branch(9)
         assert test_wire.branch_count == 10
         
     def test_limits_branch_count_to_10(self, test_wire):
-        for i in range(11):
-            test_wire.add_branch()
+        test_wire.add_branch(9)
+        test_wire.add_branch()
         assert test_wire.branch_count == 10
     
     def test_prints_branch_limit_error(self, capfd, test_wire):
-        for i in range(10):
-            test_wire.add_branch()
+        test_wire.add_branch(10)
         out, err = capfd.readouterr()
         assert out == "Cannot add branch - limit reached\n"
-        
-    def test_creates_n_branches(self, test_wire):
-        test_wire.add_branch(4)
-        assert test_wire.branch_count == 5
+
         

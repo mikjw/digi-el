@@ -40,13 +40,11 @@ class TestInputCreation:
         assert test_container.inputs['B'] == {'component': None, 'signal': None}
         
     def test_adds_input_c(self, test_container):
-        for i in range(2):
-            test_container.add_input()
+        test_container.add_input(2)
         assert test_container.inputs['C'] == {'component': None, 'signal': None}
      
     def test_adds_input_e(self, test_container):
-        for i in range(9):
-            test_container.add_input()
+        test_container.add_input(9)
         assert test_container.inputs['J'] == {'component': None, 'signal': None}
         
     def test_increments_input_count_to_2(self, test_container):
@@ -54,29 +52,22 @@ class TestInputCreation:
         assert test_container.input_count == 2
         
     def test_increments_input_count_to_3(self, test_container):
-        for i in range(2):
-            test_container.add_input()
+        test_container.add_input(2)
         assert test_container.input_count == 3
         
     def test_increments_input_count_to_9(self, test_container):
-        for i in range(8):
-            test_container.add_input()
+        test_container.add_input(8)
         assert test_container.input_count == 9
         
     def test_limits_input_count_to_16(self, test_container):
-        for i in range(17):
-            test_container.add_input()
+        test_container.add_input(15)
+        test_container.add_input()
         assert test_container.input_count == 16
         
     def test_prints_input_count_limit_error(self, capfd, test_container):
-        for i in range(16):
-            test_container.add_input()
+        test_container.add_input(16)
         out, err = capfd.readouterr()
         assert out == "Cannot add input - limit reached\n"
-        
-    def test_creates_n_inputs(self, test_container):
-        test_container.add_input(4)
-        assert test_container.input_count == 5
 
 class TestOutputCreation:
     def test_adds_output_b(self, test_container):
@@ -84,13 +75,11 @@ class TestOutputCreation:
         assert test_container.outputs['B'] == {'component': None, 'signal': None}
         
     def test_adds_output_c(self, test_container):
-        for i in range(2):
-            test_container.add_output()
+        test_container.add_output(2)
         assert test_container.outputs['C'] == {'component': None, 'signal': None}
      
     def test_adds_output_e(self, test_container):
-        for i in range(9):
-            test_container.add_output()
+        test_container.add_output(9)
         assert test_container.outputs['J'] == {'component': None, 'signal': None}
         
     def test_increments_output_count_to_2(self, test_container):
@@ -98,26 +87,19 @@ class TestOutputCreation:
         assert test_container.output_count == 2
         
     def test_increments_output_count_to_3(self, test_container):
-        for i in range(2):
-            test_container.add_output()
+        test_container.add_output(2)
         assert test_container.output_count == 3
         
     def test_increments_output_count_to_9(self, test_container):
-        for i in range(8):
-            test_container.add_output()
+        test_container.add_output(8)
         assert test_container.output_count == 9
         
     def test_limits_output_count_to_16(self, test_container):
-        for i in range(17):
-            test_container.add_output()
+        test_container.add_output(15)
+        test_container.add_output()
         assert test_container.output_count == 16
         
     def test_prints_output_count_limit_error(self, capfd, test_container):
-        for i in range(16):
-            test_container.add_output()
+        test_container.add_output(16)
         out, err = capfd.readouterr()
         assert out == "Cannot add output - limit reached\n"
-        
-    def test_creates_n_outputs(self, test_container):
-        test_container.add_output(4)
-        assert test_container.output_count == 5
