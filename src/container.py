@@ -35,11 +35,14 @@ class Container():
             print(err)
             
     def connect_within(self, component, terminal):
-        if terminal not in self.inputs:
-            print("Connection failed - invalid input terminal on container")
-        else:
-            self.inputs[terminal]['component'] = component
-            self.inputs[terminal]['component'].connect_previous(self)
+        try:
+            if terminal not in self.inputs:
+                raise ValueError("Connection failed - invalid input terminal on container")
+            else:
+                self.inputs[terminal]['component'] = component
+                self.inputs[terminal]['component'].connect_previous(self)
+        except ValueError as err:
+            print(err)
         
     def connect_previous(self, component, terminal):
         self.outputs[terminal]['component'] = component
