@@ -131,3 +131,15 @@ class TestConnection:
         test_container.add_output()
         test_container.connect_previous(mock_wire, 'B')
         assert test_container.outputs['B']['component'] == mock_wire
+
+    def test_notifies_invalid_input_terminal_b(self, capfd, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.connect_within(mock_wire, 'B')
+        out, err = capfd.readouterr()
+        assert out == "Connection failed - invalid input terminal on container\n"
+        
+    def test_notifies_invalid_input_terminal_c(self, capfd, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.connect_within(mock_wire, 'C')
+        out, err = capfd.readouterr()
+        assert out == "Connection failed - invalid input terminal on container\n"
