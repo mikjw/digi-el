@@ -50,7 +50,7 @@ class TestConnection:
         test_wire.connect_next(mock_component, 'A', 'A')
         mock_component.connect_previous.assert_called_with(test_wire, 'A')
         
-    def test_calls_connect_previous_on_next_with_a(self, test_wire, mocker):
+    def test_calls_connect_previous_on_next_with_b(self, test_wire, mocker):
         mock_component = mocker.Mock()
         test_wire.connect_next(mock_component, 'A', 'B')
         mock_component.connect_previous.assert_called_with(test_wire, 'B')
