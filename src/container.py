@@ -29,7 +29,7 @@ class Container():
             else:
                 for i in range(number_to_add):
                     self.output_count += 1
-                    label = chr(self.output_count + 64)
+                    label = chr(self.output_count + 89)
                     self.outputs[label] = {'component': None, 'signal': None}
         except ValueError as err:
             print(err)

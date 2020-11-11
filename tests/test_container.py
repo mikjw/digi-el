@@ -70,6 +70,9 @@ class TestInputCreation:
         assert out == "Cannot add input - limit reached\n"
 
 class TestOutputCreation:
+    def test_starts_with_output_z(self, test_container):
+        assert test_container.outputs['Z'] == {'component': None, 'signal': None}
+
     def test_adds_output_b(self, test_container):
         test_container.add_output()
         assert test_container.outputs['B'] == {'component': None, 'signal': None}
