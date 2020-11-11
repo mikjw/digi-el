@@ -108,8 +108,8 @@ class TestConnection:
     def test_connects_to_component_at_input_a(self, test_container, mocker):
         test_wire = mocker.Mock()
         test_container.connect_within(test_wire, 'A')
-        assert test_container.inputs['A']['component'] == test_wire
-        
+        assert test_container.inputs['A']['component'] == test_wire      
+    
     def test_connects_to_component_at_input_b(self, test_container, mocker):
         test_wire = mocker.Mock()
         test_container.add_input()
