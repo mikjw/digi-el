@@ -1,7 +1,7 @@
 class Container():
     def __init__(self, inputs=1, outputs=1):
-        self.input_count_limit = 16
-        self.output_count_limit = 16
+        self.input_count_limit = 13
+        self.output_count_limit = 13
         self.input_count = 0
         self.output_count = 0
         self.inputs = {}

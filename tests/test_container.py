@@ -26,13 +26,13 @@ class TestInitialization:
         test_container_2 = container.Container(5)
         assert 'E' in test_container_2.inputs
         
-    def test_increments_15_inputs_on_initialization(self):
-        test_container_2 = container.Container(15)
-        assert test_container_2.input_count == 15
+    def test_increments_12_inputs_on_initialization(self):
+        test_container_2 = container.Container(12)
+        assert test_container_2.input_count == 12
         
-    def test_creates_15_inputs_on_initialization(self):
-        test_container_2 = container.Container(15)
-        assert 'O' in test_container_2.inputs
+    def test_creates_12_inputs_on_initialization(self):
+        test_container_2 = container.Container(12)
+        assert 'L' in test_container_2.inputs
 
 class TestInputCreation:
     def test_adds_input_b(self, test_container):
@@ -59,10 +59,10 @@ class TestInputCreation:
         test_container.add_input(8)
         assert test_container.input_count == 9
         
-    def test_limits_input_count_to_16(self, test_container):
-        test_container.add_input(15)
+    def test_limits_input_count_to_13(self, test_container):
+        test_container.add_input(12)
         test_container.add_input()
-        assert test_container.input_count == 16
+        assert test_container.input_count == 13
         
     def test_prints_input_count_limit_error(self, capfd, test_container):
         test_container.add_input(16)
@@ -94,10 +94,10 @@ class TestOutputCreation:
         test_container.add_output(8)
         assert test_container.output_count == 9
         
-    def test_limits_output_count_to_16(self, test_container):
-        test_container.add_output(15)
+    def test_limits_output_count_to_13(self, test_container):
+        test_container.add_output(12)
         test_container.add_output()
-        assert test_container.output_count == 16
+        assert test_container.output_count == 13
         
     def test_prints_output_count_limit_error(self, capfd, test_container):
         test_container.add_output(16)
