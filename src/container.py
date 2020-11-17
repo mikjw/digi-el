@@ -45,5 +45,12 @@ class Container():
             print(err)
         
     def connect_previous(self, component, terminal):
-        self.outputs[terminal]['outer_component'] = component
+        try:
+            if terminal not in self.outputs:
+                raise ValueError("Connection failed - invalid output terminal on container")
+            else:
+                self.outputs[terminal]['outer_component'] = component
+        except ValueError as err:
+            print(err)
+        
 
