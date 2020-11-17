@@ -45,5 +45,5 @@ class Container():
             print(err)
         
     def connect_previous(self, component, terminal):
-        self.outputs[terminal]['inner_component'] = component
+        self.outputs[terminal]['outer_component'] = component
 
