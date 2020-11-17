@@ -47,9 +47,9 @@ class Container():
     def connect_previous(self, component, terminal):
         try:
             if terminal not in self.outputs and terminal not in self.inputs:
-                raise ValueError("Connection failed - invalid output terminal on container")
-            elif terminal == 'M':
-                    self.inputs['M']['inner_component'] = component
+                raise ValueError("Connection failed - invalid terminal on container")
+            elif (65 <= ord(terminal) <= 77):
+                self.inputs[terminal]['inner_component'] = component
             else:
                 self.outputs[terminal]['outer_component'] = component
         except ValueError as err:
