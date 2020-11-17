@@ -4,7 +4,7 @@ class Container():
         self.output_count_limit = 13
         self.input_count = 0
         self.output_count = 0
-        self.internal_inputs = {}
+        self.inputs = {}
         self.outputs = {}
     
         self.add_input(inputs)
@@ -18,7 +18,7 @@ class Container():
                 for i in range(number_to_add):
                     self.input_count += 1
                     label = chr(self.input_count + 64)
-                    self.internal_inputs[label] = {'component': None, 'signal': None}
+                    self.inputs[label] = {'component': None, 'signal': None}
         except ValueError as err:
             print(err)
             
@@ -36,11 +36,11 @@ class Container():
             
     def connect_within(self, component, terminal):
         try:
-            if terminal not in self.internal_inputs:
+            if terminal not in self.inputs:
                 raise ValueError("Connection failed - invalid input terminal on container")
             else:
-                self.internal_inputs[terminal]['component'] = component
-                self.internal_inputs[terminal]['component'].connect_previous(self)
+                self.inputs[terminal]['component'] = component
+                self.inputs[terminal]['component'].connect_previous(self)
         except ValueError as err:
             print(err)
         

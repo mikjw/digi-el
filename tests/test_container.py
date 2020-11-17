@@ -7,7 +7,7 @@ def test_container():
 
 class TestInitialization:
     def test_input(self, test_container):
-        assert test_container.internal_inputs['A'] == {'component': None, 'signal': None}
+        assert test_container.inputs['A'] == {'component': None, 'signal': None}
         
     def test_output(self, test_container):
         assert test_container.outputs['Z'] == {'component': None, 'signal': None}
@@ -24,7 +24,7 @@ class TestInitialization:
         
     def test_creates_5_inputs_on_initialization(self):
         test_container_2 = container.Container(5)
-        assert 'E' in test_container_2.internal_inputs
+        assert 'E' in test_container_2.inputs
         
     def test_increments_12_inputs_on_initialization(self):
         test_container_2 = container.Container(12)
@@ -32,20 +32,20 @@ class TestInitialization:
         
     def test_creates_12_inputs_on_initialization(self):
         test_container_2 = container.Container(12)
-        assert 'L' in test_container_2.internal_inputs
+        assert 'L' in test_container_2.inputs
 
 class TestInputCreation:
     def test_adds_input_b(self, test_container):
         test_container.add_input()
-        assert test_container.internal_inputs['B'] == {'component': None, 'signal': None}
+        assert test_container.inputs['B'] == {'component': None, 'signal': None}
         
     def test_adds_input_c(self, test_container):
         test_container.add_input(2)
-        assert test_container.internal_inputs['C'] == {'component': None, 'signal': None}
+        assert test_container.inputs['C'] == {'component': None, 'signal': None}
      
     def test_adds_input_e(self, test_container):
         test_container.add_input(9)
-        assert test_container.internal_inputs['J'] == {'component': None, 'signal': None}
+        assert test_container.inputs['J'] == {'component': None, 'signal': None}
         
     def test_increments_input_count_to_2(self, test_container):
         test_container.add_input()
@@ -111,13 +111,13 @@ class TestConnection:
     def test_connects_to_component_at_input_a(self, test_container, mocker):
         test_wire = mocker.Mock()
         test_container.connect_within(test_wire, 'A')
-        assert test_container.internal_inputs['A']['component'] == test_wire      
+        assert test_container.inputs['A']['component'] == test_wire      
     
     def test_connects_to_component_at_input_b(self, test_container, mocker):
         test_wire = mocker.Mock()
         test_container.add_input()
         test_container.connect_within(test_wire, 'B')
-        assert test_container.internal_inputs['B']['component'] == test_wire
+        assert test_container.inputs['B']['component'] == test_wire
      
     def test_calls_connect_previous_on_comp(self, test_container, mocker):
         mock_wire = mocker.Mock()
@@ -153,3 +153,4 @@ class TestConnection:
         test_container.connect_within(mock_wire, 'B')
         out, err = capfd.readouterr()
         assert out != "Connection failed - invalid input terminal on container\n"
+        
