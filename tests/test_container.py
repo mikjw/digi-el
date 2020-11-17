@@ -146,7 +146,7 @@ class TestConnection:
         test_container.add_output()
         test_container.connect_previous(mock_wire, 'Y')
         out, err = capfd.readouterr()
-        assert out != "Connection failed - invalid output terminal on container\n"
+        assert out == ''
 
     def test_assigns_output_outer_comp_for_n(self, test_container, mocker):
         mock_wire = mocker.Mock()
@@ -194,5 +194,5 @@ class TestConnection:
         test_container.add_input()
         test_container.connect_within(mock_wire, 'B')
         out, err = capfd.readouterr()
-        assert out != "Connection failed - invalid input terminal on container\n"
+        assert out == ''
         

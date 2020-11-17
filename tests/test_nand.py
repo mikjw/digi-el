@@ -61,7 +61,7 @@ class TestConnection:
         mock_wire = mocker.Mock()
         test_nand.connect_previous(mock_wire, 'B')
         out, err = capfd.readouterr()
-        assert out != "Connection failed - invalid input terminal\n"
+        assert out == ''
         
     def test_rejects_invalid_terminal_attribute(self, capfd, test_nand, mocker):
         mock_wire = mocker.Mock()
