@@ -7,10 +7,10 @@ def test_container():
 
 class TestInitialization:
     def test_input(self, test_container):
-        assert test_container.inputs['A'] == {'component': None, 'signal': None}
+        assert test_container.inputs['A'] == {'inner_component': None, 'signal': None}
         
     def test_output(self, test_container):
-        assert test_container.outputs['Z'] == {'component': None, 'signal': None}
+        assert test_container.outputs['Z'] == {'inner_component': None, 'signal': None}
         
     def test_inits_with_input_count(self, test_container):
         assert test_container.input_count == 1
@@ -37,15 +37,15 @@ class TestInitialization:
 class TestInputCreation:
     def test_adds_input_b(self, test_container):
         test_container.add_input()
-        assert test_container.inputs['B'] == {'component': None, 'signal': None}
+        assert test_container.inputs['B'] == {'inner_component': None, 'signal': None}
         
     def test_adds_input_c(self, test_container):
         test_container.add_input(2)
-        assert test_container.inputs['C'] == {'component': None, 'signal': None}
+        assert test_container.inputs['C'] == {'inner_component': None, 'signal': None}
      
     def test_adds_input_e(self, test_container):
         test_container.add_input(9)
-        assert test_container.inputs['J'] == {'component': None, 'signal': None}
+        assert test_container.inputs['J'] == {'inner_component': None, 'signal': None}
         
     def test_increments_input_count_to_2(self, test_container):
         test_container.add_input()
@@ -71,19 +71,19 @@ class TestInputCreation:
 
 class TestOutputCreation:
     def test_starts_with_output_z(self, test_container):
-        assert test_container.outputs['Z'] == {'component': None, 'signal': None}
+        assert test_container.outputs['Z'] == {'inner_component': None, 'signal': None}
 
     def test_adds_output_y(self, test_container):
         test_container.add_output()
-        assert test_container.outputs['Y'] == {'component': None, 'signal': None}
+        assert test_container.outputs['Y'] == {'inner_component': None, 'signal': None}
         
     def test_adds_output_x(self, test_container):
         test_container.add_output(2)
-        assert test_container.outputs['X'] == {'component': None, 'signal': None}
+        assert test_container.outputs['X'] == {'inner_component': None, 'signal': None}
      
     def test_adds_output_q(self, test_container):
         test_container.add_output(9)
-        assert test_container.outputs['Q'] == {'component': None, 'signal': None}
+        assert test_container.outputs['Q'] == {'inner_component': None, 'signal': None}
         
     def test_increments_output_count_to_2(self, test_container):
         test_container.add_output()
@@ -111,13 +111,13 @@ class TestConnection:
     def test_connects_to_component_at_input_a(self, test_container, mocker):
         test_wire = mocker.Mock()
         test_container.connect_within(test_wire, 'A')
-        assert test_container.inputs['A']['component'] == test_wire      
+        assert test_container.inputs['A']['inner_component'] == test_wire      
     
     def test_connects_to_component_at_input_b(self, test_container, mocker):
         test_wire = mocker.Mock()
         test_container.add_input()
         test_container.connect_within(test_wire, 'B')
-        assert test_container.inputs['B']['component'] == test_wire
+        assert test_container.inputs['B']['inner_component'] == test_wire
      
     def test_calls_connect_previous_on_comp(self, test_container, mocker):
         mock_wire = mocker.Mock()
@@ -127,13 +127,13 @@ class TestConnection:
     def test_connects_previous_at_z(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.connect_previous(mock_wire, 'Z')
-        assert test_container.outputs['Z']['component'] == mock_wire
+        assert test_container.outputs['Z']['inner_component'] == mock_wire
         
     def test_connects_previous_at_b(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.add_output()
         test_container.connect_previous(mock_wire, 'Y')
-        assert test_container.outputs['Y']['component'] == mock_wire
+        assert test_container.outputs['Y']['inner_component'] == mock_wire
 
     def test_notifies_invalid_input_terminal_b(self, capfd, test_container, mocker):
         mock_wire = mocker.Mock()

@@ -18,7 +18,7 @@ class Container():
                 for i in range(number_to_add):
                     self.input_count += 1
                     label = chr(self.input_count + 64)
-                    self.inputs[label] = {'component': None, 'signal': None}
+                    self.inputs[label] = {'inner_component': None, 'signal': None}
         except ValueError as err:
             print(err)
             
@@ -30,7 +30,7 @@ class Container():
                 for i in range(number_to_add):
                     self.output_count += 1
                     label = chr(- self.output_count + 91)
-                    self.outputs[label] = {'component': None, 'signal': None}
+                    self.outputs[label] = {'inner_component': None, 'signal': None}
         except ValueError as err:
             print(err)
             
@@ -39,11 +39,11 @@ class Container():
             if terminal not in self.inputs:
                 raise ValueError("Connection failed - invalid input terminal on container")
             else:
-                self.inputs[terminal]['component'] = component
-                self.inputs[terminal]['component'].connect_previous(self)
+                self.inputs[terminal]['inner_component'] = component
+                self.inputs[terminal]['inner_component'].connect_previous(self)
         except ValueError as err:
             print(err)
         
     def connect_previous(self, component, terminal):
-        self.outputs[terminal]['component'] = component
+        self.outputs[terminal]['inner_component'] = component
 
