@@ -148,6 +148,12 @@ class TestConnection:
         out, err = capfd.readouterr()
         assert out != "Connection failed - invalid output terminal on container\n"
 
+    def test_assigns_output_for_n(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.add_output(12)
+        test_container.connect_previous(mock_wire, 'N')
+        assert test_container.outputs['N']['outer_component'] == mock_wire
+
     def test_notifies_invalid_input_terminal_b(self, capfd, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.connect_within(mock_wire, 'B')
