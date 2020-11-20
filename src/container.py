@@ -55,4 +55,5 @@ class Container():
         except ValueError as err:
             print(err)
         
-
+    def connect_next(self, component, terminal):
+        self.outputs[terminal]['outer_component'] = component

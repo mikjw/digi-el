@@ -196,3 +196,15 @@ class TestConnectPrevious:
         test_container.connect_within(mock_wire, 'B')
         out, err = capfd.readouterr()
         assert out == ''
+
+class TestConnectNext:
+    def test_connects_to_next_at_z(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.connect_next(mock_wire, 'Z')
+        assert test_container.outputs['Z']['outer_component'] == mock_wire
+
+    def test_connects_to_next_at_z(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.add_output()
+        test_container.connect_next(mock_wire, 'Y')
+        assert test_container.outputs['Y']['outer_component'] == mock_wire
