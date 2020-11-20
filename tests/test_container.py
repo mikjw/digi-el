@@ -128,13 +128,13 @@ class TestConnectPrevious:
     def test_connects_previous_at_z(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.connect_previous(mock_wire, 'Z')
-        assert test_container.outputs['Z']['outer_component'] == mock_wire
+        assert test_container.outputs['Z']['inner_component'] == mock_wire
         
     def test_connects_previous_at_y(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.add_output()
         test_container.connect_previous(mock_wire, 'Y')
-        assert test_container.outputs['Y']['outer_component'] == mock_wire
+        assert test_container.outputs['Y']['inner_component'] == mock_wire
 
     def test_notifies_invalid_output_terminal_y(self, capfd, test_container, mocker):
         mock_wire = mocker.Mock()
@@ -153,30 +153,30 @@ class TestConnectPrevious:
         mock_wire = mocker.Mock()
         test_container.add_output(12)
         test_container.connect_previous(mock_wire, 'N')
-        assert test_container.outputs['N']['outer_component'] == mock_wire
+        assert test_container.outputs['N']['inner_component'] == mock_wire
 
     def test_assigns_input_inner_comp_for_m(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.add_input(12)
         test_container.connect_previous(mock_wire, 'M')
-        assert test_container.inputs['M']['inner_component'] == mock_wire
+        assert test_container.inputs['M']['outer_component'] == mock_wire
 
     def test_assigns_input_inner_comp_for_a(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.connect_previous(mock_wire, 'A')
-        assert test_container.inputs['A']['inner_component'] == mock_wire
+        assert test_container.inputs['A']['outer_component'] == mock_wire
 
     def test_assigns_input_inner_comp_for_b(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.add_input()
         test_container.connect_previous(mock_wire, 'B')
-        assert test_container.inputs['B']['inner_component'] == mock_wire
+        assert test_container.inputs['B']['outer_component'] == mock_wire
 
     def test_assigns_input_inner_comp_for_c(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.add_input(2)
         test_container.connect_previous(mock_wire, 'C')
-        assert test_container.inputs['C']['inner_component'] == mock_wire
+        assert test_container.inputs['C']['outer_component'] == mock_wire
 
     def test_notifies_invalid_input_terminal_b(self, capfd, test_container, mocker):
         mock_wire = mocker.Mock()
