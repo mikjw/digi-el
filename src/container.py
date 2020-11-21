@@ -65,3 +65,7 @@ class Container():
         except ValueError as err:
             print(err)
 
+    def receive_signal(self, component, signal):
+        for v in self.inputs.values():
+            if v['outer_component'] == component:
+                v['signal'] = signal

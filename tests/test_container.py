@@ -136,7 +136,7 @@ class TestConnectPrevious:
         test_container.connect_previous(mock_wire, 'Y')
         assert test_container.outputs['Y']['inner_component'] == mock_wire
 
-    def test_notifies_invalid_output_terminal_y(self, capfd, test_container, mocker):
+    def test_notifies_when_invalid_output_terminal_y(self, capfd, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.connect_previous(mock_wire, 'Y')
         out, err = capfd.readouterr()
@@ -221,3 +221,29 @@ class TestConnectNext:
         test_container.connect_next(mock_wire, 'Y')
         out, err = capfd.readouterr()
         assert out == ''
+
+    def test_calls_connect_previous_on_outer_comp(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.connect_next(mock_wire, 'Z')
+        mock_wire.connect_previous.assert_called_with(test_container)
+
+class TestSignalReceipt:    
+    def test_receives_high_input_signal_at_a(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.connect_previous(mock_wire, 'A')
+        test_container.receive_signal(mock_wire, 'HIGH')
+        assert test_container.inputs['A']['signal'] == 'HIGH'
+
+    def test_receives_high_input_signal_at_b(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.add_input()
+        test_container.connect_previous(mock_wire, 'B')
+        test_container.receive_signal(mock_wire, 'HIGH')
+        assert test_container.inputs['B']['signal'] == 'HIGH'
+
+    def test_receives_high_input_signal_at_f(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.add_input(5)
+        test_container.connect_previous(mock_wire, 'F')
+        test_container.receive_signal(mock_wire, 'HIGH')
+        assert test_container.inputs['F']['signal'] == 'HIGH'
