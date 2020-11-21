@@ -56,8 +56,11 @@ class Container():
             print(err)
         
     def connect_next(self, component, terminal):
-        if terminal not in self.outputs:
-            print("Connection failed - invalid terminal on container")
-        else:
-            self.outputs[terminal]['outer_component'] = component
+        try:
+            if terminal not in self.outputs:
+                raise ValueError("Connection failed - invalid terminal on container")
+            else:
+                self.outputs[terminal]['outer_component'] = component
+        except ValueError as err:
+            print(err)
 
