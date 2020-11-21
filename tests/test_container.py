@@ -203,8 +203,21 @@ class TestConnectNext:
         test_container.connect_next(mock_wire, 'Z')
         assert test_container.outputs['Z']['outer_component'] == mock_wire
 
-    def test_connects_to_next_at_z(self, test_container, mocker):
+    def test_connects_to_next_at_y(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.add_output()
         test_container.connect_next(mock_wire, 'Y')
         assert test_container.outputs['Y']['outer_component'] == mock_wire
+
+    def test_notifies_when_terminal_y_is_invalid(self, capfd, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.connect_next(mock_wire, 'Y')
+        out, err = capfd.readouterr()
+        assert out == "Connection failed - invalid terminal on container\n"
+
+    def test_does_not_notify_when_terminal_y_is_valid(self, capfd, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.add_output()
+        test_container.connect_next(mock_wire, 'Y')
+        out, err = capfd.readouterr()
+        assert out == ''
