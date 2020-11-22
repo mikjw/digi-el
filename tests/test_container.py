@@ -229,23 +229,29 @@ class TestConnectNext:
 
 class TestSignalReceipt:    
     def test_receives_high_input_signal_at_a(self, test_container, mocker):
-        mock_wire = mocker.Mock()
-        test_container.connect_previous(mock_wire, 'A')
-        test_container.receive_signal(mock_wire, 'HIGH')
+        mock_wire_in = mocker.Mock()
+        mock_wire_out = mocker.Mock()
+        test_container.connect_previous(mock_wire_in, 'A')
+        test_container.connect_within(mock_wire_out, 'A')
+        test_container.receive_signal(mock_wire_in, 'HIGH')
         assert test_container.inputs['A']['signal'] == 'HIGH'
 
     def test_receives_high_input_signal_at_b(self, test_container, mocker):
-        mock_wire = mocker.Mock()
+        mock_wire_in = mocker.Mock()
+        mock_wire_out = mocker.Mock()
         test_container.add_input()
-        test_container.connect_previous(mock_wire, 'B')
-        test_container.receive_signal(mock_wire, 'HIGH')
+        test_container.connect_previous(mock_wire_in, 'B')
+        test_container.connect_within(mock_wire_out, 'B')
+        test_container.receive_signal(mock_wire_in, 'HIGH')
         assert test_container.inputs['B']['signal'] == 'HIGH'
 
     def test_receives_high_input_signal_at_f(self, test_container, mocker):
-        mock_wire = mocker.Mock()
+        mock_wire_in = mocker.Mock()
+        mock_wire_out = mocker.Mock()
         test_container.add_input(5)
-        test_container.connect_previous(mock_wire, 'F')
-        test_container.receive_signal(mock_wire, 'HIGH')
+        test_container.connect_previous(mock_wire_in, 'F')
+        test_container.connect_within(mock_wire_out, 'F')
+        test_container.receive_signal(mock_wire_in, 'HIGH')
         assert test_container.inputs['F']['signal'] == 'HIGH'
 
     def test_receives_high_input_signal_at_z(self, test_container, mocker):
@@ -260,6 +266,15 @@ class TestSignalReceipt:
         test_container.connect_previous(mock_wire, 'Y')
         test_container.receive_signal(mock_wire, 'HIGH')
         assert test_container.outputs['Y']['signal'] == 'HIGH'
+
+class TestSignalTransmission:
+    def test_transmits_to_inner_component_on_input(self, test_container, mocker):
+        mock_wire_in = mocker.Mock()
+        mock_wire_out = mocker.Mock()
+        test_container.connect_previous(mock_wire_in, 'A')
+        test_container.connect_within(mock_wire_out, 'A')
+        test_container.receive_signal(mock_wire_in, 'HIGH')
+        mock_wire_out.receive_signal.assert_called_with('HIGH')
 
 
 

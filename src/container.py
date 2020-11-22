@@ -69,6 +69,7 @@ class Container():
         for v in self.inputs.values():
             if v['outer_component'] == component:
                 v['signal'] = signal
+                v['inner_component'].receive_signal(v['signal'])
         for v in self.outputs.values():
             if v['inner_component'] == component:
                 v['signal'] = signal
