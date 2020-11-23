@@ -268,6 +268,12 @@ class TestSignalReceipt:
         test_container.receive_signal(mock_wire, 'HIGH')
         assert test_container.outputs['Z']['signal'] == 'HIGH'
 
+    def test_receives_low_input_signal_at_z(self, test_container, mocker):
+        mock_wire = mocker.Mock()
+        test_container.connect_previous(mock_wire, 'Z')
+        test_container.receive_signal(mock_wire, 'LOW')
+        assert test_container.outputs['Z']['signal'] == 'LOW'
+
     def test_receives_high_input_signal_at_y(self, test_container, mocker):
         mock_wire = mocker.Mock()
         test_container.add_output()
