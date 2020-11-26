@@ -65,12 +65,18 @@ class Container():
         except ValueError as err:
             print(err)
 
-    def receive_signal(self, component, signal):
-        for v in self.inputs.values():
-            if v['outer_component'] == component:
-                v['signal'] = signal
-                v['inner_component'].receive_signal(v['signal'])
-        for v in self.outputs.values():
-            if v['inner_component'] == component:
-                v['signal'] = signal
-                v['outer_component'].receive_signal(v['signal'])
+    def receive_signal(self, component, signal):    
+        for key, value in self.inputs.items():
+            if value['outer_component'] == component:
+                value['signal'] = signal
+                self.__transmit(key)
+        for key, value in self.outputs.items():
+            if value['inner_component'] == component:
+                value['signal'] = signal
+                self.__transmit(key)
+
+    def __transmit(self, terminal):
+        if (65 <= ord(terminal) <= 77):
+            self.inputs[terminal]['inner_component'].receive_signal(self.inputs[terminal]['signal'])
+        else:
+            self.outputs[terminal]['outer_component'].receive_signal(self.outputs[terminal]['signal'])
