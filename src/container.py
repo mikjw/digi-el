@@ -48,7 +48,7 @@ class Container():
         try:
             if terminal not in self.outputs and terminal not in self.inputs:
                 raise ValueError("Connection failed - invalid terminal on container")
-            elif (65 <= ord(terminal) <= 77):
+            elif self.__is_input(terminal):
                 self.inputs[terminal]['outer_component'] = component
             else:
                 self.outputs[terminal]['inner_component'] = component
@@ -76,7 +76,11 @@ class Container():
                 self.__transmit(key)
 
     def __transmit(self, terminal):
-        if (65 <= ord(terminal) <= 77):
+        if self.__is_input(terminal):
+            print(self.__is_input(terminal))
             self.inputs[terminal]['inner_component'].receive_signal(self.inputs[terminal]['signal'])
         else:
             self.outputs[terminal]['outer_component'].receive_signal(self.outputs[terminal]['signal'])
+
+    def __is_input(self, terminal):
+        return 65 <= ord(terminal) <= 77
