@@ -77,7 +77,6 @@ class Container():
 
     def __transmit(self, terminal):
         if self.__is_input(terminal):
-            print(self.__is_input(terminal))
             self.inputs[terminal]['inner_component'].receive_signal(self.inputs[terminal]['signal'])
         else:
             self.outputs[terminal]['outer_component'].receive_signal(self.outputs[terminal]['signal'])
