@@ -17,14 +17,14 @@ class TestInputCreation:
         test_printer.add_input()
         assert test_printer.inputs['A'] == {'component': None, 'signal': None}
 
+    def test_increments_input_counter_to_1(self, test_printer):
+        test_printer.add_input()
+        assert test_printer.input_count == 1
+
     def test_does_not_add_more_than_one_input(self, test_printer):
         with pytest.raises(KeyError):
             test_printer.add_input()
             test_printer.inputs['B']
-
-    def test_increments_input_counter_to_1(self, test_printer):
-        test_printer.add_input()
-        assert test_printer.input_count == 1
 
     def test_adds_input_b(self, test_printer):
         for i in range(2):
@@ -35,4 +35,10 @@ class TestInputCreation:
         for i in range(2):
             test_printer.add_input()
         assert test_printer.input_count == 2
+
+    def test_does_not_add_more_than_two_inputs(self, test_printer):
+        with pytest.raises(KeyError):
+            for i in range(2):
+                test_printer.add_input()
+            test_printer.inputs['C']
 

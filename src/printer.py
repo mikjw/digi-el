@@ -9,7 +9,8 @@ class Printer():
             self.inputs['A'] = {'component': None, 'signal': None}
         elif self.input_count == 2:
             self.inputs['B'] = {'component': None, 'signal': None}
-        self.inputs['C'] = {'component': None, 'signal': None}
+        else:  
+            self.inputs['C'] = {'component': None, 'signal': None}
 
 
 
