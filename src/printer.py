@@ -5,12 +5,7 @@ class Printer():
 
     def add_input(self):
         self.input_count += 1
-        if self.input_count == 1:
-            self.inputs['A'] = {'component': None, 'signal': None}
-        elif self.input_count == 2:
-            self.inputs['B'] = {'component': None, 'signal': None}
-        else:  
-            self.inputs['C'] = {'component': None, 'signal': None}
-
+        label = chr(self.input_count + 64)
+        self.inputs[label] = {'component': None, 'signal': None}
 
 
