@@ -304,4 +304,3 @@ class TestSignalTransmission:
         test_container.receive_signal(mock_wire_in, 'HIGH')
         mock_wire_out.receive_signal.assert_called_with('HIGH')
 
-
