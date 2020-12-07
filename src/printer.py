@@ -1,5 +1,6 @@
 class Printer():
-    def __init__(self):
+    def __init__(self, source_component):
+        self.source_component = source_component
         self.input_count = 0
         self.inputs = {}
 

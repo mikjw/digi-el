@@ -1,9 +1,14 @@
 import pytest
 from src import printer
+from src import container
 
-@pytest.fixture(autouse=True)   
-def test_printer():
-    return printer.Printer()
+@pytest.fixture(autouse=True) 
+def dummy_container():
+    return container.Container()
+ 
+@pytest.fixture(autouse=True)  
+def test_printer(dummy_container):
+    return printer.Printer(dummy_container)
 
 class TestInitialization:
     def test_has_empty_inputs_dict(self, test_printer):
@@ -11,6 +16,9 @@ class TestInitialization:
 
     def test_has_input_count(self, test_printer):
         assert test_printer.input_count == 0
+        
+    def test_initializes_with_container(self, test_printer, dummy_container):
+        assert test_printer.source_component == dummy_container
 
 class TestInputCreation:
     def test_adds_input_a(self, test_printer):
@@ -57,5 +65,6 @@ class TestInputCreation:
             for i in range(3):
                 test_printer.add_input()
             test_printer.inputs['D']
+
 
 
