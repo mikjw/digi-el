@@ -10,6 +10,9 @@ class Container():
         self.add_input(inputs)
         self.add_output(outputs)
         
+    def get_outputs(self):
+        return self.outputs
+        
     def add_input(self, number_to_add=1):
         try:
             if self.input_count + number_to_add > self.input_count_limit:

@@ -33,7 +33,11 @@ class TestInitialization:
     def test_creates_12_inputs_on_initialization(self):
         test_container_2 = container.Container(12)
         assert 'L' in test_container_2.inputs
-
+    
+class TestGetter:
+    def test_get_outputs_returns_outputs(self, test_container):
+        assert test_container.get_outputs() == {'Z': {'inner_component': None, 'outer_component': None, 'signal': None}}
+        
 class TestInputCreation:
     def test_adds_input_b(self, test_container):
         test_container.add_input()
