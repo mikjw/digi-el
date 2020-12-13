@@ -2,13 +2,25 @@ import pytest
 from src import printer
 from src import container
 
+@pytest.fixture(autouse=True)  
+def test_printer():
+    return printer.Printer()
+
 @pytest.fixture(autouse=True) 
 def dummy_container():
     return container.Container()
- 
+
 @pytest.fixture(autouse=True)  
-def test_printer(dummy_container):
+def printer_with_container(dummy_container):
     return printer.Printer(dummy_container)
+
+@pytest.fixture(autouse=True) 
+def dummy_container_2_outputs():
+    return container.Container(2, 2)
+
+@pytest.fixture(autouse=True)  
+def test_printer_2_inputs(dummy_container_2_outputs):
+    return printer.Printer(dummy_container_2_outputs)
 
 class TestInitialization:
     def test_has_empty_inputs_dict(self, test_printer):
@@ -17,8 +29,13 @@ class TestInitialization:
     def test_has_input_count(self, test_printer):
         assert test_printer.input_count == 0
         
-    def test_initializes_with_container(self, test_printer, dummy_container):
-        assert test_printer.source_component == dummy_container
+    def test_initializes_with_container(self, printer_with_container, dummy_container):
+        assert printer_with_container.source_component == dummy_container
+
+    def test_adds_inputs_matching_container_outputs(self, test_printer_2_inputs):
+        print(test_printer_2_inputs.source_component)
+        print(len(test_printer_2_inputs.source_component.get_outputs()))
+        assert test_printer_2_inputs.input_count == 2
 
 class TestInputCreation:
     def test_adds_input_a(self, test_printer):
