@@ -33,8 +33,6 @@ class TestInitialization:
         assert printer_with_container.source_component == dummy_container
 
     def test_adds_inputs_matching_container_outputs(self, test_printer_2_inputs):
-        print(test_printer_2_inputs.source_component)
-        print(len(test_printer_2_inputs.source_component.get_outputs()))
         assert test_printer_2_inputs.input_count == 2
 
 class TestInputCreation:
