@@ -66,5 +66,26 @@ class TestInputCreation:
                 test_printer.add_input()
             test_printer.inputs['D']
 
+    def test_adds_2_inputs_when_passed_2(self, test_printer):
+        test_printer.add_input(2)
+        assert test_printer.input_count == 2
+
+    def test_adds_input_b_when_passed_2(self, test_printer):
+        test_printer.add_input(2)
+        assert test_printer.inputs['B'] == {'component': None, 'signal': None}
+
+    def test_adds_5_inputs_when_passed_5(self, test_printer):
+        test_printer.add_input(5)
+        assert test_printer.input_count == 5
+
+    def test_adds_input_e_when_passed_5(self, test_printer):
+        test_printer.add_input(5)
+        assert test_printer.inputs['E'] == {'component': None, 'signal': None}
+
+    def test_adds_default_1_input_passed_nothing(self, test_printer):
+        test_printer.add_input()
+        assert test_printer.input_count == 1
+
+
 
 
