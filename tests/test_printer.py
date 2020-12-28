@@ -1,4 +1,5 @@
 import pytest
+from src import line
 from src import printer
 from src import container
 
@@ -101,6 +102,12 @@ class TestInputCreation:
         test_printer.add_input()
         assert test_printer.input_count == 1
 
+class TestConnection:
+    def test_connects_to_previous_component(self, test_printer_2_inputs, mocker):
+        mock_component = mocker.Mock()
+        test_printer_2_inputs.connect_previous(mock_component, 'A')
+        assert test_printer_2_inputs.inputs['A']['component'] == mock_component
+        
 
 
 

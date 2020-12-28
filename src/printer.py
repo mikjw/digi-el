@@ -1,3 +1,5 @@
+from .line import Line
+
 class Printer():
     def __init__(self, source_component=None):
         self.source_component = source_component
@@ -13,4 +15,7 @@ class Printer():
             label = chr(self.input_count + 64)
             self.inputs[label] = {'component': None, 'signal': None}
 
+    def connect_previous(self, comp, terminal):
+        self.inputs[terminal]['component'] = comp
 
+            
