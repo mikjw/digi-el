@@ -8,6 +8,7 @@ class Printer():
 
         if self.source_component is not None:
             self.add_input(len(self.source_component.get_outputs()))
+            self.connect_source()
 
     def add_input(self, number_to_add=1):
         for i in range(number_to_add):
@@ -17,5 +18,14 @@ class Printer():
 
     def connect_previous(self, comp, terminal):
         self.inputs[terminal]['component'] = comp
+
+    def connect_source(self):
+        print(self.source_component.get_outputs())
+        for i, v in enumerate(self.inputs):
+            line = Line()
+            out_terminal = chr(i + 64)
+            in_terminal = out_terminal
+            self.inputs[in_terminal]['component'] = line
+            self.inputs[in_terminal]['component'].connect_next(self, out_terminal, in_terminal)
 
             

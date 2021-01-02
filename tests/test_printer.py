@@ -108,6 +108,10 @@ class TestConnection:
         test_printer_2_inputs.connect_previous(mock_component, 'A')
         assert test_printer_2_inputs.inputs['A']['component'] == mock_component
         
+class TestSourceConnection:
+    def test_connects_lines_to_src_comp(self, test_printer_2_inputs):
+        assert isinstance(test_printer_2_inputs.inputs['B'], line.Line)
+
 
 
 
