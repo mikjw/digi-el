@@ -20,12 +20,8 @@ class Printer():
         self.inputs[terminal]['component'] = comp
 
     def connect_source(self):
-        print(self.source_component.get_outputs())
         for i, v in enumerate(self.inputs):
             line = Line()
-            out_terminal = chr(i + 64)
-            in_terminal = out_terminal
+            out_terminal = in_terminal = chr(i + 65)
             self.inputs[in_terminal]['component'] = line
             self.inputs[in_terminal]['component'].connect_next(self, out_terminal, in_terminal)
-
-            

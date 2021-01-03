@@ -110,8 +110,4 @@ class TestConnection:
         
 class TestSourceConnection:
     def test_connects_lines_to_src_comp(self, test_printer_2_inputs):
-        assert isinstance(test_printer_2_inputs.inputs['B'], line.Line)
-
-
-
-
+        assert isinstance(test_printer_2_inputs.inputs['B']['component'], line.Line)
