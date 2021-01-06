@@ -25,3 +25,9 @@ class Printer():
             out_terminal = in_terminal = chr(i + 65)
             self.inputs[in_terminal]['component'] = line
             self.inputs[in_terminal]['component'].connect_next(self, out_terminal, in_terminal)
+
+    def receive_signal(self, component, signal):
+        for key, value in self.inputs.items():
+            if value['component'] == component:
+                value['signal'] = signal
+

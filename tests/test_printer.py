@@ -114,3 +114,32 @@ class TestSourceConnection:
     
     def test_connects_line_to_src_comp_at_b(self, test_printer_2_inputs):
         assert isinstance(test_printer_2_inputs.inputs['B']['component'], line.Line)
+
+class TestSignalReceipt:    
+    def test_receives_high_input_signal_at_a(self, test_printer, mocker):
+        mock_line_in = mocker.Mock()
+        test_printer.add_input()
+        test_printer.connect_previous(mock_line_in, 'A')
+        test_printer.receive_signal(mock_line_in, 'HIGH')
+        assert test_printer.inputs['A']['signal'] == 'HIGH'
+
+    def test_receives_low_input_signal_at_a(self, test_printer, mocker):
+        mock_line_in = mocker.Mock()
+        test_printer.add_input()
+        test_printer.connect_previous(mock_line_in, 'A')
+        test_printer.receive_signal(mock_line_in, 'LOW')
+        assert test_printer.inputs['A']['signal'] == 'LOW'
+
+    def test_receives_high_input_signal_at_b(self, test_printer, mocker):
+        mock_line_in = mocker.Mock()
+        test_printer.add_input(2)
+        test_printer.connect_previous(mock_line_in, 'B')
+        test_printer.receive_signal(mock_line_in, 'HIGH')
+        assert test_printer.inputs['B']['signal'] == 'HIGH'
+        
+    def test_receives_low_input_signal_at_b(self, test_printer, mocker):
+        mock_line_in = mocker.Mock()
+        test_printer.add_input(2)
+        test_printer.connect_previous(mock_line_in, 'B')
+        test_printer.receive_signal(mock_line_in, 'LOW')
+        assert test_printer.inputs['B']['signal'] == 'LOW'
