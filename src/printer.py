@@ -33,5 +33,7 @@ class Printer():
                 value['signal'] = signal
 
     def output_values(self):
-        print('A: HIGH | B: LOW')
-
+        output = ""
+        for key, value in self.inputs.items():
+            output += (f"{key}: {value['signal']} | ")
+        print(output[0:-3])
