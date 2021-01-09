@@ -143,3 +143,19 @@ class TestSignalReceipt:
         test_printer.connect_previous(mock_line_in, 'B')
         test_printer.receive_signal(mock_line_in, 'LOW')
         assert test_printer.inputs['B']['signal'] == 'LOW'
+
+class TestPrinting:
+    def test_prints_output(self, capfd, mocker, test_printer):
+        mock_line_in_a = mocker.Mock()
+        mock_line_in_b = mocker.Mock()
+        test_printer.add_input(2)
+        test_printer.connect_previous(mock_line_in_a, 'A')
+        test_printer.connect_previous(mock_line_in_b, 'B')
+        test_printer.receive_signal(mock_line_in_a, 'HIGH')
+        test_printer.receive_signal(mock_line_in_b, 'LOW')
+        test_printer.output_values()
+        out, err = capfd.readouterr()
+        assert out == 'A: HIGH | B: LOW\n'
+
+        
+

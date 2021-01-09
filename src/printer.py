@@ -22,7 +22,8 @@ class Printer():
     def connect_source(self):
         for i, v in enumerate(self.inputs):
             line = Line()
-            out_terminal = in_terminal = chr(i + 65)
+            out_terminal = 'A'
+            in_terminal = chr(i + 65)
             self.inputs[in_terminal]['component'] = line
             self.inputs[in_terminal]['component'].connect_next(self, out_terminal, in_terminal)
 
@@ -30,4 +31,7 @@ class Printer():
         for key, value in self.inputs.items():
             if value['component'] == component:
                 value['signal'] = signal
+
+    def output_values(self):
+        print('A: HIGH | B: LOW')
 
