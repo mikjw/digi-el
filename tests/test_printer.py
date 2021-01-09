@@ -157,7 +157,7 @@ class TestPrinting:
         out, err = capfd.readouterr()
         assert out == 'A: HIGH | B: LOW\n'
 
-    def test_prints_output_hugh_low(self, capfd, mocker, test_printer):
+    def test_prints_output_high_low(self, capfd, mocker, test_printer):
         mock_line_in_a = mocker.Mock()
         mock_line_in_b = mocker.Mock()
         test_printer.add_input(2)
