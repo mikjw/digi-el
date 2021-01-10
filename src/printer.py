@@ -22,10 +22,10 @@ class Printer():
     def connect_source(self):
         for i, v in enumerate(self.inputs):
             line = Line()
-            out_terminal = 'A'
+            out_terminal = chr(-i + 90)
             in_terminal = chr(i + 65)
+            self.source_component.connect_next(line, out_terminal)
             self.inputs[in_terminal]['component'] = line
-            self.inputs[in_terminal]['component'].connect_next(self, out_terminal, in_terminal)
 
     def receive_signal(self, component, signal):
         ready_to_print = True

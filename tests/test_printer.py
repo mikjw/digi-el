@@ -109,10 +109,16 @@ class TestConnection:
         assert test_printer_2_inputs.inputs['A']['component'] == mock_component
         
 class TestSourceConnection:
-    def test_connects_line_to_src_comp_at_a(self, test_printer_2_inputs):
+    def test_connects_src_to_line_at_z(self, test_printer_2_inputs):
+        assert isinstance(test_printer_2_inputs.source_component.get_outputs()['Z']['outer_component'], line.Line)
+
+    def test_connects_src_to_line_at_y(self, test_printer_2_inputs):
+        assert isinstance(test_printer_2_inputs.source_component.get_outputs()['Y']['outer_component'], line.Line)
+
+    def test_connects_line_to_self_at_a(self, test_printer_2_inputs):
         assert isinstance(test_printer_2_inputs.inputs['A']['component'], line.Line)
     
-    def test_connects_line_to_src_comp_at_b(self, test_printer_2_inputs):
+    def test_connects_line_to_self_at_b(self, test_printer_2_inputs):
         assert isinstance(test_printer_2_inputs.inputs['B']['component'], line.Line)
 
 class TestSignalReceipt:    
@@ -153,7 +159,6 @@ class TestPrinting:
         test_printer.connect_previous(mock_line_in_b, 'B')
         test_printer.receive_signal(mock_line_in_a, 'HIGH')
         test_printer.receive_signal(mock_line_in_b, 'LOW')
-        # test_printer.output_values()
         out, err = capfd.readouterr()
         assert out == 'A: HIGH | B: LOW\n'
 
@@ -165,7 +170,6 @@ class TestPrinting:
         test_printer.connect_previous(mock_line_in_b, 'B')
         test_printer.receive_signal(mock_line_in_a, 'LOW')
         test_printer.receive_signal(mock_line_in_b, 'HIGH')
-        # test_printer.output_values()
         out, err = capfd.readouterr()
         assert out == 'A: LOW | B: HIGH\n'
         
