@@ -145,7 +145,7 @@ class TestSignalReceipt:
         assert test_printer.inputs['B']['signal'] == 'LOW'
 
 class TestPrinting:
-    def test_prints_output_low_high(self, capfd, mocker, test_printer):
+    def test_prints_output_high_low(self, capfd, mocker, test_printer):
         mock_line_in_a = mocker.Mock()
         mock_line_in_b = mocker.Mock()
         test_printer.add_input(2)
@@ -153,11 +153,11 @@ class TestPrinting:
         test_printer.connect_previous(mock_line_in_b, 'B')
         test_printer.receive_signal(mock_line_in_a, 'HIGH')
         test_printer.receive_signal(mock_line_in_b, 'LOW')
-        test_printer.output_values()
+        # test_printer.output_values()
         out, err = capfd.readouterr()
         assert out == 'A: HIGH | B: LOW\n'
 
-    def test_prints_output_high_low(self, capfd, mocker, test_printer):
+    def test_prints_output_low_high(self, capfd, mocker, test_printer):
         mock_line_in_a = mocker.Mock()
         mock_line_in_b = mocker.Mock()
         test_printer.add_input(2)
@@ -165,6 +165,27 @@ class TestPrinting:
         test_printer.connect_previous(mock_line_in_b, 'B')
         test_printer.receive_signal(mock_line_in_a, 'LOW')
         test_printer.receive_signal(mock_line_in_b, 'HIGH')
-        test_printer.output_values()
+        # test_printer.output_values()
         out, err = capfd.readouterr()
         assert out == 'A: LOW | B: HIGH\n'
+        
+    def test_prints_when_all_inputs_have_signals(self, capfd, mocker, test_printer):
+        mock_line_in_a = mocker.Mock()
+        mock_line_in_b = mocker.Mock()
+        test_printer.add_input(2)
+        test_printer.connect_previous(mock_line_in_a, 'A')
+        test_printer.connect_previous(mock_line_in_b, 'B')
+        test_printer.receive_signal(mock_line_in_a, 'LOW')
+        test_printer.receive_signal(mock_line_in_b, 'HIGH')
+        out, err = capfd.readouterr()
+        assert out == 'A: LOW | B: HIGH\n'
+        
+    def test_does_not_print_without_all_signals(self, capfd, mocker, test_printer):
+        mock_line_in_a = mocker.Mock()
+        mock_line_in_b = mocker.Mock()
+        test_printer.add_input(2)
+        test_printer.connect_previous(mock_line_in_a, 'A')
+        test_printer.connect_previous(mock_line_in_b, 'B')
+        test_printer.receive_signal(mock_line_in_a, 'LOW')
+        out, err = capfd.readouterr()
+        assert out == ''

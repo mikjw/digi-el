@@ -28,9 +28,14 @@ class Printer():
             self.inputs[in_terminal]['component'].connect_next(self, out_terminal, in_terminal)
 
     def receive_signal(self, component, signal):
+        ready_to_print = True
         for key, value in self.inputs.items():
             if value['component'] == component:
                 value['signal'] = signal
+            if (value['signal'] == None):
+                ready_to_print = False
+        if (ready_to_print):
+            self.output_values()
 
     def output_values(self):
         output = ""
